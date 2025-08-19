@@ -98,7 +98,7 @@ bonus: $(ALL_BONUS_OBJ)
 # **************************************************************************** #
 clean: 
 	rm -rf $(Objects) obj
-	make -C Libft clean
+	make clean -C Libft
 	make clean -C minilibx-linux
 
 fclean: clean
