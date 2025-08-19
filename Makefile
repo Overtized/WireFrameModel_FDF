@@ -21,7 +21,8 @@ NAME = fdf
 # **************************************************************************** #
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3 -O0
+FLAGS = -Wall -Wextra -Werror -g3 -O0 
+MLX_FLAG = -L$(SHARED_DIR)-lmlx -lXext -lX11 
 INCLUDES = -I./includes
 INCLUDES_bonus = -I./bonus
 
@@ -30,7 +31,7 @@ INCLUDES_bonus = -I./bonus
 # **************************************************************************** #
 
 SRC_DIR = srcs
-SHARED_DIR = 
+SHARED_DIR = minilibx-linux
 OBJ_DIR = obj
 LIBFT_DIR = Libft
 PRINTF_DIR = 
@@ -72,7 +73,8 @@ all: $(NAME)
 
 $(NAME): $(Objects) $(SHARED_OBJ)
 	@make -C $(LIBFT_DIR)
-	$(CC) $(FLAGS) $(INCLUDES) $(Objects) $(SHARED_OBJ) $(LIBFT) -o $(NAME)
+	@make -C $(SHARED_DIR)
+	$(CC) $(MLX_FLAG) $(INCLUDES) $(Objects) $(SHARED_OBJ) $(LIBFT) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
@@ -88,6 +90,7 @@ $(OBJ_DIR)/%.o: $(SHARED_DIR)/%.c
 
 bonus: $(ALL_BONUS_OBJ)
 	@make -C $(LIBFT_DIR)
+	@make -C $(SHARED_DIR)
 	$(CC) $(FLAGS) $(INCLUDES_bonus) $(ALL_BONUS_OBJ) $(LIBFT) -o $(NAME)_bonus
 
 # **************************************************************************** #
@@ -95,7 +98,8 @@ bonus: $(ALL_BONUS_OBJ)
 # **************************************************************************** #
 clean: 
 	rm -rf $(Objects) obj
-	make -C My_Libft clean
+	make -C Libft clean
+	make clean -C minilibx-linux
 
 fclean: clean
 	rm -rf $(NAME) $(NAME)_bonus

@@ -2,5 +2,6 @@
 #define FDF_H
 
 #include "../Libft/My_libft.h"
+#include "../minilibx-linux/mlx.h"
 
 #endif
