@@ -41,7 +41,7 @@ BONUS_DIR = bonus
 #                                Source Files                                  #
 # **************************************************************************** #
 
-SRC = $(addprefix $(SRC_DIR)/, main.c utils.c)
+SRC = $(addprefix $(SRC_DIR)/, main.c utils.c utils2.c)
 SHARED = $(addprefix $(SHARED_DIR)/, )
 BONUS_SRC = $(addprefix $(BONUS_DIR)/, )
 # **************************************************************************** #
@@ -99,6 +99,7 @@ bonus: $(ALL_BONUS_OBJ)
 clean: 
 	rm -rf $(Objects) obj
 	make clean -C Libft
+	rm -rf $(LIBFT_DIR)/libft.a
 	make clean -C minilibx-linux
 
 fclean: clean

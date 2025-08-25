@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:34:23 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/25 17:39:58 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/25 18:13:41 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,18 @@ static char *read_map(int fd)
 }
 static bool	test_map_validity(char *buffer)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (buffer[i])
 	{
-		printf("buf[%d] = '%c' (%d)\n", i, buffer[i], (unsigned char)buffer[i]);
-		if (!ft_isdigit_space((unsigned char)buffer[i]))
-			return( printf("buf[%d] = %d\n", i, (unsigned char)buffer[i]), false);
+		// printf("buf[%d] = '%c' (%d)\n", i, buffer[i], (unsigned char)buffer[i]);
+		if (!(ft_isdigit_space(buffer[i]) || ft_ishex(buffer[i])))
+			return(printf("\t\tHELLO\n"), false);
 		i++;
 	}
+	if (!check_hex_comb(buffer))
+		return(printf("\t\tHELLOtoi\n"),false);
 	return (true);
 }
 
@@ -88,6 +90,29 @@ bool	test_input(char *map)
 	if (!test_map(map))
 		return(false);
 	return (true);
+}
+static bool check_hex_comb(char *buffer)
+{
+	int flag;
+	int i;
+
+	flag = 0;
+	i = 0;
+	while (buffer[i])
+	{
+		if (buffer[i] == '0' && buffer[i + 1] == 'x')
+			flag = 1;
+		i++;
+	}
+	if (flag == 0)
+		return(false);
+	else 
+	{
+		if (!check_hex_validity(buffer))
+			return (false);
+	}
+	return (true);
+	
 }
 // tester les qrgs, tester l'extension du fichier, tester la validite de la map\
 	// tester la presence de chiffre

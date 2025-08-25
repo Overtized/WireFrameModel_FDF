@@ -21,4 +21,5 @@ typedef struct	s_map
 	char *map;
 }				t_map;
 bool	test_input(char *map);
+bool	check_hex_validity(char *buffer);
 #endif
