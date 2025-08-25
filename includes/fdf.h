@@ -7,7 +7,7 @@
 
 typedef struct	s_mlx
 {
-	t_position tab[50];
+	// t_position tab[50];
 }				t_mlx;
 typedef struct	s_position
 {
@@ -16,4 +16,9 @@ typedef struct	s_position
 	int Z_pos;
 	int	color;
 }				t_position;
+typedef struct	s_map
+{
+	char *map;
+}				t_map;
+bool	test_input(char *map);
 #endif

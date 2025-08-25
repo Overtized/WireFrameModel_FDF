@@ -1,9 +1,13 @@
 #include "../includes/fdf.h"
 
-int	main(void)
+int	main(int ac, char *av[])
 {
+	if (ac != 2)
+		return(ft_printf(1, "wrong args number, args should be 2\n"));
+	if (!test_input(av[1]))
+		return (ft_printf(1, "map is not valid \n"));
 	ft_printf(1, "hello world\n");
-	t_position **tab; // len tab 
+	// t_position **tab; // len tab 
 	return(0);
 }
 // tester les qrgs, tester l'extension du fichier, tester la validite de la map

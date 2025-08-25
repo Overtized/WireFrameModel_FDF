@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:36:42 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/15 10:08:02 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:11:30 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
+int		ft_isspace(int c);
+int		ft_ishex(int c);
+int		ft_isdigit_space(int c);
 int		ft_isprint(int c);
 char	*ft_itoa(int n);
 void	ft_safe_close(int *fd);
@@ -66,6 +69,7 @@ size_t	ft_strlcpy(char *dest, const char *src, unsigned int size);
 size_t	ft_strlen(const char *str);
 size_t	ft_strcpy(char *dest, const char *src);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
 int		ft_countword(char const *str, char c);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strrchr(const char *s, int c);
