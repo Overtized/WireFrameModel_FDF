@@ -2,12 +2,13 @@
 
 int	main(int ac, char *av[])
 {
+	// t_position **tab; // len tab 
+
 	if (ac != 2)
 		return(ft_printf(1, "wrong args number, args should be 2\n"));
 	if (!test_input(av[1]))
-		return (ft_printf(1, "map is not valid \n"));
+		return (ft_printf(1, "map is not valid \n"), 1);
 	ft_printf(1, "hello world\n");
-	// t_position **tab; // len tab 
 	return(0);
 }
 // tester les qrgs, tester l'extension du fichier, tester la validite de la map
