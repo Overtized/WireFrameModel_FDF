@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:36:42 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/25 16:11:30 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/26 18:03:07 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 int		ft_atoi(const char *nptr);
+int		ft_atoi_base(const char *nptr, char	*base);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 int		ft_isalnum(int c);

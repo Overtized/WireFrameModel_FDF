@@ -7,19 +7,17 @@
 
 typedef struct	s_mlx
 {
-	// t_position tab[50];
+	
 }				t_mlx;
-typedef struct	s_position
+typedef struct	s_map
 {
 	int X_pos;
 	int Y_pos;
 	int Z_pos;
 	int	color;
-}				t_position;
-typedef struct	s_map
-{
 	char *map;
 }				t_map;
-bool	test_input(char *map);
+bool	test_input(char *map, t_map *map_cf);
 bool	check_hex_validity(char *buffer);
+bool	parse_map(char *map, t_map **map_params);
 #endif
