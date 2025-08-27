@@ -24,5 +24,5 @@ bool	init_map(char *file, t_map *map_config);
 bool	handle_errors(int ac, char *av);
 void	ft_free_structs(t_map *commands);
 //
-// bool	parse_map(char *map, t_map_cf **map_param);
+bool	parse_map(char *map, t_points **map_param);
 #endif
