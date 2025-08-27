@@ -35,46 +35,46 @@ int	ft_countword(char const *str, char c)
 	return (wordcount);
 }
 
-static void	freetab(char **tab, int lasttab)
+// static void	freetab(char **tab, int lasttab)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < lasttab)
+// 	{
+// 		free (tab[i]);
+// 		i++;
+// 	}
+// 	free (tab);
+// }
+
+static int	tabfill(char **tab, const char *str, char delim)
 {
 	int	i;
-
-	i = 0;
-	while (i < lasttab)
-	{
-		free (tab[i]);
-		i++;
-	}
-	free (tab);
-}
-
-static int	tabfill(char **tab, char const *str, char delim)
-{
-	int	i;
-	int	wordlength;
 	int	tabnumb;
+	int	wordlen;
 
 	i = 0;
 	tabnumb = 0;
-	wordlength = 0;
+	wordlen = 0;
 	while (str[i])
 	{
 		while (str[i] == delim)
 			i++;
-		while (str[i] != delim && str[i])
-		{
-			wordlength++;
-			i++;
-		}
-		tab[tabnumb] = malloc (sizeof (char) * (wordlength + 1));
+		if (!str[i])
+			break ;
+		wordlen = 0;
+		while (str[i + wordlen] && str[i + wordlen] != delim)
+			wordlen++;
+		tab[tabnumb] = malloc(sizeof(char) * (wordlen + 1));
 		if (!tab[tabnumb])
-			return (freetab(tab, tabnumb), 0);
-		ft_strlcpy (tab[tabnumb], &str[i - wordlength], wordlength + 1);
+			return (ft_free_double_char(tab), 0);
+		memcpy(tab[tabnumb], &str[i], wordlen);
+		tab[tabnumb][wordlen] = '\0';
 		tabnumb++;
-		wordlength = 0;
+		i += wordlen;
 	}
-	tab[tabnumb] = NULL;
-	return (1);
+	return (tab[tabnumb] = NULL, 1);
 }
 
 char	**ft_split(char const *str, char c)

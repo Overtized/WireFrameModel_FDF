@@ -5,19 +5,24 @@
 #include "../minilibx-linux/mlx.h"
 #include "math.h"
 
-typedef struct	s_mlx
+typedef struct	s_points
 {
-	
-}				t_mlx;
-typedef struct	s_map
-{
-	int X_pos;
-	int Y_pos;
 	int Z_pos;
 	int	color;
-	char *map;
+}				t_points;
+typedef struct	s_map
+{
+	int rows;
+	int token_per_lines;
+	t_points **map_coordonates;
 }				t_map;
-bool	test_input(char *map, t_map *map_cf);
+bool	test_input(char *av);
 bool	check_hex_validity(char *buffer);
-bool	parse_map(char *map, t_map **map_params);
+//
+bool	init_map(char *file, t_map *map_config);
+//
+bool	handle_errors(int ac, char *av);
+void	ft_free_structs(t_map *commands);
+//
+// bool	parse_map(char *map, t_map_cf **map_param);
 #endif

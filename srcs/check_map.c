@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:34:23 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/26 18:53:53 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:00:27 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static bool	test_map_validity(char *buffer)
 	hex_flag = 0;
 	while (buffer[i])
 	{
-		if (!(ft_isdigit_space(buffer[i]) || ft_ishex(buffer[i])))
-			return (false);
+		if (!ft_isdigit_space(buffer[i]) && !ft_ishex(buffer[i]))
+			return (printf("hello\n"), false);
 		if (buffer[i] == '0' && buffer[i + 1] == 'x')
 			hex_flag = 1;
 		i++;
@@ -83,7 +83,7 @@ static bool	test_map_validity(char *buffer)
 	return (true);
 }
 
-static bool	test_map(char *map, t_map *map_cf)
+static bool	test_map(char *map)
 {
 	int		fd;
 	char	*buffer;
@@ -97,11 +97,11 @@ static bool	test_map(char *map, t_map *map_cf)
 	close(fd);
 	if (!test_map_validity(buffer))
 		return (free(buffer), false);
-	map_cf->map = buffer;
+	free(buffer);
 	return (true);
 }
 
-bool	test_input(char *map, t_map *map_cf)
+bool	test_input(char *map)
 {
 	char	*cursor;
 	char	*extension;
@@ -115,7 +115,7 @@ bool	test_input(char *map, t_map *map_cf)
 		return (false);
 	if (ft_strcmp(cursor, extension) != 0)
 		return (false);
-	if (!test_map(map, map_cf))
+	if (!test_map(map))
 		return (false);
 	return (true);
 }

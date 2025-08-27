@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   handle_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/25 15:51:40 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/25 15:53:01 by mchanlia         ###   ########.fr       */
+/*   Created: 2025/08/27 17:10:04 by mchanlia          #+#    #+#             */
+/*   Updated: 2025/08/27 18:49:03 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(int c)
+#include "../includes/fdf.h"
+
+bool	handle_errors(int ac, char *av)
 {
-	if (c == ' ' || c == '\n')
-		return (1);
-	return (0);
+	if (ac != 2)
+	{
+		ft_printf(1, "wrong args number, args should be 2\n");
+		return (false);
+	}
+	if (!test_input(av))
+	{
+		ft_printf(1, "raw_map is not valid \n");
+		return (false);
+	}
+	return(true);
 }

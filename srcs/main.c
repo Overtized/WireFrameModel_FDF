@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:21:44 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/26 18:53:56 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/27 18:02:41 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 int	main(int ac, char *av[])
 {
-	t_map	map;
+	t_map	*map;
 
-	if (ac != 2)
-		return (ft_printf(1, "wrong args number, args should be 2\n"));
-	if (!test_input(av[1], &map))
-		return (ft_printf(1, "map is not valid \n"), 1);
-	printf("%s\n\n", (map).map);
-	free(map.map);
-	// if (!parse_map(av[1], map))
+
+	map = ft_calloc(1, sizeof(t_map));
+	if(!handle_errors(ac,av[1]))
+		return (ft_free_structs(map) , 1);
+	if (!init_map(av[1], map))
+		return(ft_free_structs(map), 1);
+	// printf(" map row is %d\n", map->rows);
+	// printf(" map token is %d\n", map->token_per_lines);
+	ft_free_structs(map);
+	// if (!parse_map(raw_map.map, map_config))
 	// 	return (ft_printf(1, "parsing error \n"), 1);
-	ft_printf(1, "hello world\n");
+	// free(raw_map.raw_map);
+	// ft_printf(1, "hello world\n");
 	return (0);
 }
 // ranger dans un tableau de structure contenant tout les infos (position/
