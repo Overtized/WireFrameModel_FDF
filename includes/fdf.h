@@ -7,8 +7,9 @@
 
 typedef struct	s_points
 {
-	int Z_pos;
-	int	color;
+	int			Z_pos;
+	int			color;
+	struct s_points	*next;
 }				t_points;
 typedef struct	s_map
 {
@@ -17,12 +18,11 @@ typedef struct	s_map
 	t_points **map_coordonates;
 }				t_map;
 bool	test_input(char *av);
-bool	check_hex_validity(char *buffer);
 //
 bool	init_map(char *file, t_map *map_config);
 //
 bool	handle_errors(int ac, char *av);
-void	ft_free_structs(t_map *commands);
+void	ft_free_structs(t_map *commands, t_points **coordonates);
 //
 bool	parse_map(char *map, t_points **map_param);
 #endif

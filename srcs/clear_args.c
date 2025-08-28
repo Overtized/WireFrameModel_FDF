@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:20:01 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/27 17:53:34 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/28 19:41:27 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,56 +28,36 @@ void	ft_free_double_char(char **commands)
 		free (commands);
 }
 
-// static void	ft_free_args(t_map **commands)
-// {
-// 	t_map	*cursor;
-
-// 	if (!commands && !*commands)
-// 		return ;
-// 	while (commands && *commands)
-// 	{
-// 		cursor = (*commands)->next;
-// 		ft_free_double_char((*commands)->commands);
-// 		if ((*commands)->path)
-// 			free((*commands)->path);
-// 		free(*commands);
-// 		*commands = cursor;
-// 	}
-// }
-
-// static void	ft_free_files(t_files **files)
-// {
-// 	if (!files || !*files)
-// 		return ;
-// 	if ((*files)->file1)
-// 	{
-// 		free((*files)->file1);
-// 		(*files)->file1 = NULL;
-// 	}
-// 	if ((*files)->file2)
-// 	{
-// 		free((*files)->file2);
-// 		(*files)->file2 = NULL;
-// 	}
-// 	ft_safe_close(&(*files)->fds[0]);
-// 	ft_safe_close(&(*files)->fds[1]);
-// 	ft_safe_close(&(*files)->pipes[0]);
-// 	ft_safe_close(&(*files)->pipes[1]);
-// 	ft_safe_close(&(*files)->last_read_fd);
-// 	free(*files);
-// 	*files = NULL;
-// }
-
-void	ft_free_structs(t_map *commands)
+static void	ft_free_args(t_points **map_params)
 {
-	if (commands)
+	t_points	*cursor;
+
+	if (!map_params && !*map_params)
+		return ;
+	while (map_params && *map_params)
 	{
-		free(commands);
+		cursor = (*map_params)->next;
+		free((*map_params));
+		*map_params = cursor;
 	}
-	// if (commands)
-	// 	ft_free_args(commands);
-	// if (files)
-	// 	ft_free_files(files);
+	free((map_params));
+}
+
+
+void	ft_free_structs(t_map *map_config, t_points **map_params)
+{
+	if (map_config)
+	{
+		if (map_config->map_coordonates)
+		{
+			ft_free_args(map_config->map_coordonates);
+		}
+		free(map_config);
+	}
+	if (map_params)
+	{
+		ft_free_args(map_params);
+	}
 }
 
 void	ft_safe_close(int *fd)

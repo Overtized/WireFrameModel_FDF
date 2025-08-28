@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:34:23 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/27 19:00:27 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/28 20:14:12 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,26 @@
 
 static bool	check_hex_comb(char *buffer)
 {
-	int	flag;
-	int	i;
+	char	*cursor;
+	int		hex_len;
 
-	flag = 0;
-	i = 0;
-	while (buffer[i])
+	cursor = buffer;
+	while (cursor)
 	{
-		if (buffer[i] == '0' && buffer[i + 1] == 'x')
-			flag = 1;
-		i++;
-	}
-	if (flag == 0)
-		return (false);
-	else
-	{
-		if (!check_hex_validity(buffer))
+		hex_len = 0;
+		cursor = (ft_strchr(cursor, 'x'));
+		if (!cursor)
 			return (false);
+		if (cursor == buffer || *(cursor - 1) != '0')
+			return (false);
+		cursor++;
+		while (hex_len < 6 && ft_ishex((int)cursor[hex_len]))
+			hex_len++;
+		if (hex_len < 3)
+			return (false);
+		if (cursor[hex_len] != '\0' && !ft_isspace((int)cursor[hex_len]))
+			return (false);
+		cursor+= hex_len;
 	}
 	return (true);
 }
@@ -64,13 +67,17 @@ static bool	test_map_validity(char *buffer)
 {
 	int	i;
 	int	hex_flag;
+	int	hex_char;
 
 	i = 0;
 	hex_flag = 0;
+	hex_char = 0;
 	while (buffer[i])
 	{
 		if (!ft_isdigit_space(buffer[i]) && !ft_ishex(buffer[i]))
-			return (printf("hello\n"), false);
+			return (false);
+		if ((buffer[i] >= 'A' && buffer[i] <= 'F') || (buffer[i] >= 'a' && buffer[i] <= 'f'))
+			hex_char = 1;
 		if (buffer[i] == '0' && buffer[i + 1] == 'x')
 			hex_flag = 1;
 		i++;
@@ -80,6 +87,8 @@ static bool	test_map_validity(char *buffer)
 		if (!check_hex_comb(buffer))
 			return (false);
 	}
+	else if (hex_flag == 0 && hex_char == 1)
+		return (false);
 	return (true);
 }
 
@@ -120,5 +129,5 @@ bool	test_input(char *map)
 	return (true);
 }
 
-// tester les qrgs, tester l'extension du fichier, tester la validite de la map\
-	// tester la presence de chiffre
+// tester les qrgs, tester l'extension du fichier, tester la validite de la map
+// tester la presence de chiffre
