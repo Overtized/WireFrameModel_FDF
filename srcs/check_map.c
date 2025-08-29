@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:34:23 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/28 20:14:12 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/29 12:14:50 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ static bool	check_hex_comb(char *buffer)
 		hex_len = 0;
 		cursor = (ft_strchr(cursor, 'x'));
 		if (!cursor)
-			return (false);
+			break ;
 		if (cursor == buffer || *(cursor - 1) != '0')
-			return (false);
+			return ( false);
 		cursor++;
 		while (hex_len < 6 && ft_ishex((int)cursor[hex_len]))
 			hex_len++;
-		if (hex_len < 3)
+		if (hex_len < 1)
 			return (false);
 		if (cursor[hex_len] != '\0' && !ft_isspace((int)cursor[hex_len]))
 			return (false);
 		cursor+= hex_len;
 	}
-	return (true);
+	return ( true);
 }
 
 static char	*read_map(int fd)

@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:12:52 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/28 19:59:05 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/29 11:21:59 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,31 @@ static int	get_token_number(char *line)
 	ft_free_double_char(split);
 	return(token);
 }
-// static bool	allocate_map(t_map *gridsize)
-// {
-// 	int	i;
+t_points	**allocate_map(t_map *map, t_points **map_point)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (i < gridsize->rows)
-// 	{
-// 		gridsize->map_coordonates = malloc(sizeof() * );
-// 		if (!gridsize->map_coordonates)
-// 			return (false);
-// 	}
-// 	gridsize->map_coordonates = malloc (sizeof() * );
-// 	if (!gridsize->map_coordonates)
-// 			return (false);
-// 	return(true);
-// }
+	i = 0;
+	map_point = malloc(sizeof(t_points *) * map->rows);
+	if (!map_point)
+		return (NULL);
+	while (i < map->rows)
+	{
+		map_point[i] = malloc(sizeof(t_points) * map->token_per_lines);
+		if (!map_point[i])
+		{
+			while (i > 0)
+			{
+				free(map_point[i]);
+				free(map_point);
+				i--;
+				return (NULL);
+			}
+		}
+		i++;
+	}
+	return(map_point);
+}
 bool	init_map(char *raw_map, t_map *map_config)
 {
 	int	fd;
@@ -71,16 +80,14 @@ bool	init_map(char *raw_map, t_map *map_config)
 		line_tok_count = get_token_number(line);
 		if (line_tok_count == -1)
 			return (close(fd), false);
-		if(map_config->token_per_lines == 0)
+		if (map_config->token_per_lines == 0)
 			map_config->token_per_lines = line_tok_count;
 		else if (map_config->token_per_lines != line_tok_count)
-			return (get_next_line(-42), free(line), false);
+			return (close(fd), get_next_line(-42), free(line), false);
 		map_config->rows++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	// if (!allocate_map(map_config))
-	// 	return (false);
 	return (close(fd), true);
 }
 

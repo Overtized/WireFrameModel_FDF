@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:21:44 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/28 20:16:27 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/29 11:48:35 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 
 int	main(int ac, char *av[])
 {
-	t_map	*map;
-	t_points **coordonates;
+	t_map		*map;
+	t_points	**map_pt;
 
-
+	map_pt = NULL;
 	map = ft_calloc(1, sizeof(t_map));
-	coordonates = NULL;
 	if(!handle_errors(ac, av[1]))
-		return (ft_free_structs(map, coordonates) , 1);
+		return (ft_free_map(map) , 1);
 	if (!init_map(av[1], map))
 	{
 		ft_printf(1, "init failed\n");
-		return(ft_free_structs(map, coordonates), 1);
+		return(ft_free_map(map) , 1);
 	}
-	ft_free_structs(map, coordonates);
+	map_pt = allocate_map(map, map_pt);
+	if (map_pt == NULL)
+		return (ft_free_structs(map, map_pt), false);
+	ft_printf(1, "number of row %d\n", map->rows);
+	ft_printf(1, "number of token per line %d\n", map->token_per_lines);
 	ft_printf(1, "hello world\n");
-	// if (!parse_map(av[1], coordonates))
+	ft_free_structs(map, map_pt);
+	// if (!parse_map(av[1], map_pt))
 	// 	return (ft_printf(1, "parsing error \n"), 1);
 	// ft_printf(1, "hello world\n");
-	// ft_free_structs(map, coordonates);
+	// ft_free_structs(map, map_pt);
 	// free(raw_map.raw_map);
 	// ft_printf(1, "hello world\n");
 	return (0);
