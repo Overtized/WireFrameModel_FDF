@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:34:23 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/29 12:14:50 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/31 14:03:58 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static bool	test_map_validity(char *buffer)
 	return (true);
 }
 
-static bool	test_map(char *map)
+static bool	test_map(char *map, t_map *map_strct)
 {
 	int		fd;
 	char	*buffer;
@@ -103,14 +103,16 @@ static bool	test_map(char *map)
 	buffer = read_map(fd);
 	if (!buffer)
 		return (free(buffer), false);
-	close(fd);
-	if (!test_map_validity(buffer))
-		return (free(buffer), false);
+	map_strct->map = ft_strdup(buffer);
 	free(buffer);
-	return (true);
+	if (!test_map_validity(map_strct->map))
+		return (free(map_strct->map), false);
+	if (!test_int(map_strct->map))
+		return (free(map_strct->map), false);
+	return (close(fd), true);
 }
 
-bool	test_input(char *map)
+bool	test_input(char *map, t_map *map_strct)
 {
 	char	*cursor;
 	char	*extension;
@@ -124,10 +126,7 @@ bool	test_input(char *map)
 		return (false);
 	if (ft_strcmp(cursor, extension) != 0)
 		return (false);
-	if (!test_map(map))
+	if (!test_map(map, map_strct))
 		return (false);
 	return (true);
 }
-
-// tester les qrgs, tester l'extension du fichier, tester la validite de la map
-// tester la presence de chiffre

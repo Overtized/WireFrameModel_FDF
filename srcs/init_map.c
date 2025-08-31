@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:12:52 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/29 11:21:59 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/08/31 14:33:42 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ bool	init_map(char *raw_map, t_map *map_config)
 	{
 		line_tok_count = get_token_number(line);
 		if (line_tok_count == -1)
-			return (close(fd), false);
+			return (close(fd), get_next_line(-42), free(line), false);
 		if (map_config->token_per_lines == 0)
 			map_config->token_per_lines = line_tok_count;
 		else if (map_config->token_per_lines != line_tok_count)
@@ -91,34 +91,48 @@ bool	init_map(char *raw_map, t_map *map_config)
 	return (close(fd), true);
 }
 
-bool	parse_map(char *map, t_points **map_param)
+static void	load_struct(char **split, t_points **map_param, int	i)
 {
-	char	**split;
 	char	*comma;
-	size_t	j;
+	int	j;
 
 	j = 0;
-	split = ft_split(map, ' ');
-	if (!split)
-		return (ft_free_double_char(split), false);
 	while (split[j])
 	{
 		comma = ft_strchr(split[j], ',');
 		if (comma)
 		{
 			*comma = '\0';
-			map_param[0][j].Z_pos = ft_atoi(split[j]);
-			map_param[0][j].color = ft_atoi_base(comma + 1, "0123456789ABCDEF");
+			map_param[i][j].Z_pos = ft_atoi(split[j]);
+			map_param[i][j].color = ft_atoi_base(comma + 1, "0123456789ABCDEF");
 		}
 		else
 		{
-			map_param[0][j].Z_pos = ft_atoi(split[j]);
-			map_param[0][j].color = 0xFFFFFF;
+			map_param[i][j].Z_pos = ft_atoi(split[j]);
+			map_param[i][j].color = 0xFFFFFF;
 		}
-		printf("%s ", split[j]);
 		j++;
 	}
-		printf("\n");
-	(void) map_param;
+}
+bool	load_map(char *map, t_points **map_param, t_map *map_struct)
+{
+	char	**split;
+	char	**lines;
+	int	i;
+
+	i = 0;
+	lines = ft_split(map, '\n');
+	if (!lines)
+		return(ft_free_double_char(lines), false);
+	while (i < map_struct->rows)
+	{
+		split = ft_split(lines[i], ' ');
+		if (!split)
+			return (ft_free_double_char(split), false);
+		load_struct(split, map_param, i);
+		ft_free_double_char(split);
+		i++;
+	}
+	ft_free_double_char(lines);
 	return (true);
 }
