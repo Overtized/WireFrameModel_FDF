@@ -22,8 +22,8 @@ NAME = fdf
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g3 -O0 
-MLX_FLAG = -L$(SHARED_DIR)-lmlx -lXext -lX11 
-INCLUDES = -I./includes
+MLX_FLAG = -L$(SHARED_DIR) -lmlx -lXext -lX11 -lm -lz
+INCLUDES = -I./includes -I./minilibx-linux
 INCLUDES_bonus = -I./bonus
 
 # **************************************************************************** #
@@ -75,7 +75,7 @@ all: $(NAME)
 $(NAME): $(Objects) $(SHARED_OBJ)
 	@make -C $(LIBFT_DIR)
 	@make -C $(SHARED_DIR)
-	$(CC) $(MLX_FLAG) $(INCLUDES) $(Objects) $(SHARED_OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(FLAGS) $(INCLUDES) $(Objects) $(SHARED_OBJ) $(LIBFT) $(MLX_FLAG) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
