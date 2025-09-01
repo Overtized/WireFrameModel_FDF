@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:21:44 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/01 16:14:29 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:45:35 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char *av[])
 	// ft_printf(1, "number of row %d\n", map->rows);
 	// ft_printf(1, "number of token per line %d\n", map->token_per_lines);
 	// ft_printf(1, "hello world\n");
-	if (!mlx_setup(&mlx))
+	if (!mlx_setup(map, map_pt, &mlx))
 		return (ft_free_structs(map, map_pt, &mlx), 1);
 	printf("hello \n");
 	ft_free_structs(map, map_pt, &mlx);

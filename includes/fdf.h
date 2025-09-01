@@ -38,7 +38,7 @@ void	ft_free_structs(t_map *map_config, t_points **map_coords, t_mlx *mlx);
 void	ft_free_map(t_map *map_config);
 t_points	**allocate_map(t_map *gridsize, t_points **coordonates);
 //
-bool	mlx_setup(t_mlx	*mlx);
+bool	mlx_setup(t_map *map_cfg, t_points **map_coords, t_mlx	*mlx);
 
 //
 #endif
