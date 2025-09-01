@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/01 17:54:15 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:09:36 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,43 +23,53 @@ static int	red_cross_mlx(t_mlx *mlx)
 	mlx_loop_end(mlx->mlx_ptr);
 	return(0);
 }
-static char *render_next_frame(t_map *map_cfg, t_points **map_cords, t_mlx *mlx)
+void	my_put_pixel(t_img_data *map, int x, int y, int color)
 {
-	void	*img;
-	char	*image;
+	char	*dst;
+	dst = NULL;
+	if (x >= 0 && x < 1920 && y >= 0 && y < 1080)
+		dst = map->addr + (y * map->line_l + x * (map->bit_l / 8));
+	*(unsigned int*)dst = color;
+}
+static void	render_next_frame(t_map *map_cfg, t_points **map_cords, t_mlx *mlx)
+{
+	t_img_data *mp;
+
+	mp = calloc(sizeof(t_img_data), 1);
 	// faire une grille 
 
-	img = mlx_new_image(mlx->mlx_ptr, 100, 100);
+	mp->img = mlx_new_image(mlx->mlx_ptr, 1920, 1080);
+	mp->addr = mlx_get_data_addr(mp->img, &mp->bit_l, &mp->line_l, &mp->endian);
 	
-	// img = mlx_destroy_image();
 	(void)map_cfg;
 	(void)map_cords;
-	return(image);
+	my_put_pixel(mp, 6, 6, 0x00FF0000);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->main_window, mp->img, 50, 50);
+	mlx_destroy_image(mlx->mlx_ptr, mp->img);
+	free(mp);
 }
 
 bool	mlx_setup(t_map *map_cfg, t_points **map_coords, t_mlx	*mlx)
 {
 	int i;
-	char *img;
-
+	
 	i = 0;
 	mlx->mlx_ptr = mlx_init();
 	if(!mlx->mlx_ptr)
-		return (false);
+		return (free(mlx->mlx_ptr), false);
 	mlx->main_window = mlx_new_window(mlx->mlx_ptr, 1920, 1080, "Hello World");
 	mlx_hook(mlx->main_window, ON_DESTROY, 0L, red_cross_mlx, mlx);
 	mlx_key_hook(mlx->main_window, esc_mlx, mlx);
-	img = render_next_frame(map_cfg, map_coords, mlx);
-	mlx_put_image_to_window(mlx->mlx_ptr,mlx->main_window, img, 200, 200);
+	render_next_frame(map_cfg, map_coords, mlx);
 	mlx_loop(mlx->mlx_ptr);
 	mlx_destroy_window(mlx->mlx_ptr, mlx->main_window);
 	mlx_destroy_display(mlx->mlx_ptr);
-	
+	free(mlx->mlx_ptr);
 	return (true);
 }
-static void garbage (void)
-{
-	// mlx_loop_hook(mlx->mlx_ptr, render_next_frame, mlx);
-	// mlx_sync()
-	// une fonction pour regrouper hook keyhook et loop si besoin place
-}
+// static void garbage (void)
+// {
+// 	// mlx_loop_hook(mlx->mlx_ptr, render_next_frame, mlx);
+// 	// mlx_sync()
+// 	// une fonction pour regrouper hook keyhook et loop si besoin place
+// }

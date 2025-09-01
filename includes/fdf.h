@@ -7,9 +7,15 @@
 
 enum
 {
-	ON_DESTROY = 17,
-	ON_KEYDOWN = 2
+	ON_DESTROY = 17
 };
+typedef struct	s_img_data {
+	void	*img;
+	char	*addr;
+	int		bit_l;
+	int		line_l;
+	int		endian;
+}				t_img_data;
 typedef struct	s_mlx
 {
 	void *mlx_ptr;
