@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:21:44 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/01 15:39:34 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/01 16:14:29 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ int	main(int ac, char *av[])
 		return (ft_free_structs(map, map_pt, &mlx), 1);
 	if (!load_map(map->map, map_pt, map))
 		return (ft_printf(1, "parsing error \n"), 1);
-	ft_printf(1, "%s\n", map->map);
-	ft_printf(1, "point X coordinates is  %d\n", map_pt[3][2].Z_pos);
-	ft_printf(1, "point X color is  %d\n", map_pt[3][2].color);
-	ft_printf(1, "number of row %d\n", map->rows);
-	ft_printf(1, "number of token per line %d\n", map->token_per_lines);
-	ft_printf(1, "hello world\n");
+	// ft_printf(1, "%s\n", map->map);
+	// ft_printf(1, "point X coordinates is  %d\n", map_pt[3][2].Z_pos);
+	// ft_printf(1, "point X color is  %d\n", map_pt[3][2].color);
+	// ft_printf(1, "number of row %d\n", map->rows);
+	// ft_printf(1, "number of token per line %d\n", map->token_per_lines);
+	// ft_printf(1, "hello world\n");
 	if (!mlx_setup(&mlx))
 		return (ft_free_structs(map, map_pt, &mlx), 1);
+	printf("hello \n");
 	ft_free_structs(map, map_pt, &mlx);
 	return (0);
 }
