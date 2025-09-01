@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:20:01 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/31 13:59:56 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/01 13:51:17 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,21 @@ void	ft_free_map(t_map *map_config)
 	
 	free(map_config);
 }
-void	ft_free_structs(t_map *map_config, t_points **map_params)
+void	ft_free_structs(t_map *map_config, t_points **map_coords, t_mlx *mlx)
 {
-	if (map_params)
+	if (map_coords)
 	{
-		ft_free_args(map_config, map_params);
+		ft_free_args(map_config, map_coords);
 	}
 	if (map_config)
 	{
 		ft_free_map(map_config);
+	}
+	if (mlx)
+	{
+		free(mlx->mlx_ptr);
+		free(mlx->main_window);
+		free(mlx);
 	}
 }
 

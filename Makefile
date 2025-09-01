@@ -42,7 +42,7 @@ BONUS_DIR = bonus
 # **************************************************************************** #
 
 SRC = $(addprefix $(SRC_DIR)/, main.c check_map.c init_map.c handle_errors.c \
-								clear_args.c)
+								clear_args.c mlx_init.c )
 SHARED = $(addprefix $(SHARED_DIR)/, )
 BONUS_SRC = $(addprefix $(BONUS_DIR)/, )
 # **************************************************************************** #
@@ -79,7 +79,8 @@ $(NAME): $(Objects) $(SHARED_OBJ)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@ 
+# attention tu as supprime la var flags dans la compil obj
 
 $(OBJ_DIR)/%.o: $(BONUS_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)

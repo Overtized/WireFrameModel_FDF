@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:12:52 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/31 14:33:42 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:38:33 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,8 @@ static void	load_struct(char **split, t_points **map_param, int	i)
 		comma = ft_strchr(split[j], ',');
 		if (comma)
 		{
-			*comma = '\0';
 			map_param[i][j].Z_pos = ft_atoi(split[j]);
-			map_param[i][j].color = ft_atoi_base(comma + 1, "0123456789ABCDEF");
+			map_param[i][j].color = ft_atoi_base(comma + 3, "0123456789ABCDEF");
 		}
 		else
 		{

@@ -76,7 +76,7 @@ int	ft_atoi_base(const char *nptr, char	*base)
 	int	baselen;
 
 	i = 0;
-	if (ft_check_baselen(base) || nptr[i] == '\0' || !base)
+	if (!ft_check_baselen(base) || nptr[i] == '\0' || !base)
 		return (0);
 	val = 0;
 	result = 0;
