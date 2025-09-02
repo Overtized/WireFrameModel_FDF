@@ -7,7 +7,9 @@
 
 enum
 {
-	ON_DESTROY = 17
+	ON_DESTROY = 17,
+	X = 1000,
+	Y = 1000
 };
 typedef struct	s_img_data {
 	void	*img;
@@ -19,11 +21,13 @@ typedef struct	s_img_data {
 typedef struct	s_mlx
 {
 	void *mlx_ptr;
-	void *main_window;
+	void *window;
 }				t_mlx;
 typedef struct	s_points
 {
-	int			Z_pos;
+	int			x;
+	int			y;
+	int			z;
 	int			color;
 }				t_points;
 typedef struct	s_map
@@ -45,6 +49,7 @@ void	ft_free_map(t_map *map_config);
 t_points	**allocate_map(t_map *gridsize, t_points **coordonates);
 //
 bool	mlx_setup(t_map *map_cfg, t_points **map_coords, t_mlx	*mlx);
-
+void	my_put_pixel(t_img_data *map, int x, int y, int color);
+void	draw_line();
 //
 #endif

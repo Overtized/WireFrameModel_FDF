@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:12:52 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/01 15:38:33 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/02 14:51:24 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,17 @@ static void	load_struct(char **split, t_points **map_param, int	i)
 		comma = ft_strchr(split[j], ',');
 		if (comma)
 		{
-			map_param[i][j].Z_pos = ft_atoi(split[j]);
+			map_param[i][j].z = ft_atoi(split[j]);
 			map_param[i][j].color = ft_atoi_base(comma + 3, "0123456789ABCDEF");
+			
 		}
 		else
 		{
-			map_param[i][j].Z_pos = ft_atoi(split[j]);
+			map_param[i][j].z = ft_atoi(split[j]);
 			map_param[i][j].color = 0xFFFFFF;
 		}
+		map_param[i][j].x = j;
+		map_param[i][j].y = i;
 		j++;
 	}
 }
