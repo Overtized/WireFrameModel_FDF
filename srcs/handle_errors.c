@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:10:04 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/31 13:48:25 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:44:45 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,29 @@ bool	handle_errors(int ac, char *av, t_map *map)
 		ft_printf(1, "raw_map is not valid \n");
 		return (false);
 	}
-	return(true);
+	return (true);
 }
+
 bool	test_int(char *buffer)
 {
-	char	**split;
-	char	**comma_split;
-	int	i;
+	char	**splt;
+	char	**com;
+	int		i;
 
 	i = 0;
-	split = ft_split(buffer, ' ');
-	if (!split)
-		return (ft_free_double_char(split), false);
-	while (split[i])
+	splt = ft_split(buffer, ' ');
+	if (!splt)
+		return (ft_free_double_char(splt), false);
+	while (splt[i])
 	{
-		comma_split = ft_split(split[i], ',');
-		if (!comma_split)
-			return (ft_free_double_char(comma_split), ft_free_double_char(split), false);
-		if (ft_is_overflow(comma_split[0]))
-			return (ft_free_double_char(comma_split), ft_free_double_char(split), false);
-		ft_free_double_char(comma_split);
+		com = ft_split(splt[i], ',');
+		if (!com)
+			return (ft_free_double_char(com), ft_free_double_char(splt), false);
+		if (ft_is_overflow(com[0]))
+			return (ft_free_double_char(com), ft_free_double_char(splt), false);
+		ft_free_double_char(com);
 		i++;
 	}
-	ft_free_double_char(split);
+	ft_free_double_char(splt);
 	return (true);
 }

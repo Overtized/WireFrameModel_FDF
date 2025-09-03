@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:21:44 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/02 14:53:41 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:44:09 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,20 @@ int	main(int ac, char *av[])
 	t_mlx		mlx;
 
 	map = ft_calloc(1, sizeof(t_map));
-	if(!handle_errors(ac, av[1], map))
-		return (ft_free_map(map) , 1);
+	if (!handle_errors(ac, av[1], map))
+		return (ft_free_map(map), 1);
 	if (!init_map(av[1], map))
-		return(ft_printf(1, "init failed\n"), ft_free_map(map) , 1);
+		return (ft_printf(1, "init failed\n"), ft_free_map(map), 1);
 	map_pt = NULL;
 	map_pt = allocate_map(map, map_pt);
 	if (map_pt == NULL)
-		return (ft_free_structs(map, map_pt, &mlx), 1);
+		return (ft_free_structs(map, map_pt), 1);
 	if (!load_map(map->map, map_pt, map))
 		return (ft_printf(1, "parsing error \n"), 1);
-	// ft_printf(1, "%s\n", map->map);
-	// ft_printf(1, "point X x-pos is  %d\n", map_pt[1][1].x);
-	// ft_printf(1, "point X y-pos is  %d\n", map_pt[1][1].y);
-	// ft_printf(1, "point X depth is  %d\n", map_pt[1][1].z);
-	// ft_printf(1, "point X color is  %d\n", map_pt[1][1].color);
-	// ft_printf(1, "number of row %d\n", map->rows);
-	// ft_printf(1, "number of token per line %d\n", map->token_per_lines);
-	// ft_printf(1, "hello world\n");
 	if (!mlx_setup(map, map_pt, &mlx))
-		return (ft_free_structs(map, map_pt, &mlx), 1);
+		return (ft_free_structs(map, map_pt), 1);
 	printf("hello \n");
-	ft_free_structs(map, map_pt, &mlx);
+	ft_free_structs(map, map_pt);
 	return (0);
 }
 // ranger dans un tableau de structure contenant tout les infos (position/

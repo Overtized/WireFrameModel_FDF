@@ -6,29 +6,83 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/03 11:34:37 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:59:48 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	my_put_pixel(t_img_data *map, int x, int y, int color)
+void	ft_put_pixel(t_img_data *map, int x, int y, int color)
 {
 	char	*dst;
+
+	if (x < 0 || x >= X || y < 0 || y >= Y)
+		return ;
 	dst = NULL;
 	if (x >= 0 && x < X && y >= 0 && y < Y)
 		dst = map->addr + (y * map->line_l + x * (map->bit_l / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
-static void	draw_line_a()
+
+static void	init_dir(t_points p1, t_points p2, int *dir_x, int *dir_y)
 {
-	
+	if (p1.x < p2.x)
+		*dir_x = 1;
+	else
+		*dir_x = -1;
+	if (p1.y < p2.y)
+		*dir_y = 1;
+	else
+		*dir_y = -1;
 }
-static void	draw_line_b()
+
+static void	ft_draw_line(t_img_data *m, t_points p1, t_points p2, int tmp_e)
 {
-	
+	int	dx;
+	int	dy;
+	int	dir_x;
+	int	dir_y;
+	int	error;
+
+	dx = ft_abs(p2.x - p1.x);
+	dy = ft_abs(p2.y - p1.y);
+	init_dir(p1, p2, &dir_x, &dir_y);
+	error = dx - dy;
+	while (p1.x != p2.x || p1.y != p2.y)
+	{
+		ft_put_pixel(m, p1.x, p1.y, p1.color);
+		tmp_e = error * 2;
+		if (tmp_e > -dy)
+		{
+			p1.x += dir_x;
+			error -= dy;
+		}
+		if (tmp_e < dx)
+		{
+			p1.y += dir_y;
+			error += dx;
+		}
+	}
 }
-void	draw_line()
+
+void	draw_lines(t_img_data *m, t_points **p, t_map *mp)
 {
-	// deux fonctions drawline a faire selon la situation
+	int	row;
+	int	col;
+
+	row = 0;
+	col = 0;
+	while (row < mp->rows)
+	{
+		col = 0;
+		while (col < mp->token_per_lines)
+		{
+			if (col < mp->token_per_lines - 1)
+				ft_draw_line(m, p[row][col], p[row][col + 1], 0);
+			if (row < mp->rows -1)
+				ft_draw_line(m, p[row][col], p[row + 1][col], 0);
+			col++;
+		}
+		row++;
+	}
 }

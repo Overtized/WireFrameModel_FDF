@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/03 11:31:40 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:52:00 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,22 @@ static void	render_grid(t_img_data *mp, t_map *map_cfg, t_points **mp_cds)
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (i < map_cfg->rows)
 	{
 		j = 0;
 		while (j < map_cfg->token_per_lines)
 		{
-			mp_cds[i][j].x = mp_cds[i][j].x *ZOOM;
-			mp_cds[i][j].y = mp_cds[i][j].y *ZOOM;
-			mp_cds[i][j].z = mp_cds[i][j].z *ZOOM - 10;
+			mp_cds[i][j].x = mp_cds[i][j].x * ZOOM;
+			mp_cds[i][j].y = mp_cds[i][j].y * ZOOM;
+			mp_cds[i][j].z = mp_cds[i][j].z * ZOOM - 100;
 			mp_cds[i][j].x += SHIFT_OFFSET;
 			mp_cds[i][j].y += SHIFT_OFFSET;
-			// mp_cds[i][j].z += SHIFT_OFFSET;
-			my_put_pixel(mp, (mp_cds[i][j]).x, (mp_cds[i][j]).y, 0x00FF0000);
+			mp_cds[i][j].z += SHIFT_OFFSET;
 			j++;
 		}
 		i++;
 	}
+	draw_lines(mp, mp_cds, map_cfg);
 }
 
 static void	render_next_frame(t_map *map_cfg, t_points **map_cords, t_mlx *mx)
@@ -68,7 +67,7 @@ bool	mlx_setup(t_map *map_cfg, t_points **map_coords, t_mlx	*mlx)
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
 		return (free(mlx->mlx_ptr), false);
-	mlx->window = mlx_new_window(mlx->mlx_ptr, X, Y, "Hello World");
+	mlx->window = mlx_new_window(mlx->mlx_ptr, X, Y, "Fdf");
 	mlx_hook(mlx->window, ON_DESTROY, 0L, red_cross_mlx, mlx);
 	mlx_key_hook(mlx->window, esc_mlx, mlx);
 	render_next_frame(map_cfg, map_coords, mlx);

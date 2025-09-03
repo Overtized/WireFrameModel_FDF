@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:34:23 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/08/31 14:03:58 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:36:36 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool	check_hex_comb(char *buffer)
 		if (!cursor)
 			break ;
 		if (cursor == buffer || *(cursor - 1) != '0')
-			return ( false);
+			return (false);
 		cursor++;
 		while (hex_len < 6 && ft_ishex((int)cursor[hex_len]))
 			hex_len++;
@@ -33,9 +33,9 @@ static bool	check_hex_comb(char *buffer)
 			return (false);
 		if (cursor[hex_len] != '\0' && !ft_isspace((int)cursor[hex_len]))
 			return (false);
-		cursor+= hex_len;
+		cursor += hex_len;
 	}
-	return ( true);
+	return (true);
 }
 
 static char	*read_map(int fd)
@@ -63,7 +63,7 @@ static char	*read_map(int fd)
 	return (join);
 }
 
-static bool	test_map_validity(char *buffer)
+static bool	test_map_validity(char *buf)
 {
 	int	i;
 	int	hex_flag;
@@ -72,19 +72,19 @@ static bool	test_map_validity(char *buffer)
 	i = 0;
 	hex_flag = 0;
 	hex_char = 0;
-	while (buffer[i])
+	while (buf[i])
 	{
-		if (!ft_isdigit_space(buffer[i]) && !ft_ishex(buffer[i]))
+		if (!ft_isdigit_space(buf[i]) && !ft_ishex(buf[i]))
 			return (false);
-		if ((buffer[i] >= 'A' && buffer[i] <= 'F') || (buffer[i] >= 'a' && buffer[i] <= 'f'))
+		if ((buf[i] >= 65 && buf[i] <= 70) || (buf[i] >= 97 && buf[i] <= 102))
 			hex_char = 1;
-		if (buffer[i] == '0' && buffer[i + 1] == 'x')
+		if (buf[i] == '0' && buf[i + 1] == 'x')
 			hex_flag = 1;
 		i++;
 	}
 	if (hex_flag == 1)
 	{
-		if (!check_hex_comb(buffer))
+		if (!check_hex_comb(buf))
 			return (false);
 	}
 	else if (hex_flag == 0 && hex_char == 1)
