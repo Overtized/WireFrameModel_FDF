@@ -9,7 +9,9 @@ enum
 {
 	ON_DESTROY = 17,
 	X = 1000,
-	Y = 1000
+	Y = 1000,
+	ZOOM = 20,
+	SHIFT_OFFSET = X / 6
 };
 typedef struct	s_img_data {
 	void	*img;

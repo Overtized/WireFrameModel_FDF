@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/02 15:12:55 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:31:40 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ static void	render_grid(t_img_data *mp, t_map *map_cfg, t_points **mp_cds)
 		j = 0;
 		while (j < map_cfg->token_per_lines)
 		{
+			mp_cds[i][j].x = mp_cds[i][j].x *ZOOM;
+			mp_cds[i][j].y = mp_cds[i][j].y *ZOOM;
+			mp_cds[i][j].z = mp_cds[i][j].z *ZOOM - 10;
+			mp_cds[i][j].x += SHIFT_OFFSET;
+			mp_cds[i][j].y += SHIFT_OFFSET;
+			// mp_cds[i][j].z += SHIFT_OFFSET;
 			my_put_pixel(mp, (mp_cds[i][j]).x, (mp_cds[i][j]).y, 0x00FF0000);
 			j++;
 		}
@@ -52,7 +58,7 @@ static void	render_next_frame(t_map *map_cfg, t_points **map_cords, t_mlx *mx)
 	mp->img = mlx_new_image(mx->mlx_ptr, X, Y);
 	mp->addr = mlx_get_data_addr(mp->img, &mp->bit_l, &mp->line_l, &mp->endian);
 	render_grid(mp, map_cfg, map_cords);
-	mlx_put_image_to_window(mx->mlx_ptr, mx->window, mp->img, X / 2, Y / 2);
+	mlx_put_image_to_window(mx->mlx_ptr, mx->window, mp->img, X / 4, Y / 4);
 	mlx_destroy_image(mx->mlx_ptr, mp->img);
 	free(mp);
 }
