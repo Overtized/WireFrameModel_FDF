@@ -42,6 +42,7 @@ BONUS_DIR = ./
 # **************************************************************************** #
 
 SRC = $(addprefix $(SRC_DIR)/, ft_atoi.c \
+								ft_abs.c  \
 								ft_atol.c  \
 								ft_overflow_check.c  \
 								ft_atoi_base.c  \

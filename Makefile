@@ -42,7 +42,7 @@ BONUS_DIR = bonus
 # **************************************************************************** #
 
 SRC = $(addprefix $(SRC_DIR)/, main.c check_map.c init_map.c handle_errors.c \
-								clear_args.c mlx_init.c utils.c )
+								clear_args.c mlx_init.c utils.c utils2.c )
 SHARED = $(addprefix $(SHARED_DIR)/, )
 BONUS_SRC = $(addprefix $(BONUS_DIR)/, )
 # **************************************************************************** #

@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:20:01 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/03 16:38:20 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:51:20 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,6 @@ void	ft_free_map(t_map *map_config)
 	{
 		free(map_config->map);
 	}
-	if (map_config && map_config->map_coordonates)
-	{
-		ft_free_args(map_config, map_config->map_coordonates);
-	}
 	free(map_config);
 }
 
@@ -62,8 +58,6 @@ void	ft_free_structs(t_map *map_config, t_points **map_coords)
 	{
 		ft_free_args(map_config, map_coords);
 	}
-	if (map_config)
-	{
-		ft_free_map(map_config);
-	}
+	ft_free_map(map_config);
+	(void)map_coords;
 }

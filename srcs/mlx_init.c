@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/03 16:52:00 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:57:27 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,23 @@ static int	red_cross_mlx(t_mlx *mlx)
 	return (0);
 }
 
-static void	render_grid(t_img_data *mp, t_map *map_cfg, t_points **mp_cds)
+static void	render_grid(t_img_data *mp, t_map *m_cg, t_points **m_cd, t_mlx *mx)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < map_cfg->rows)
+	while (i < m_cg->rows)
 	{
 		j = 0;
-		while (j < map_cfg->token_per_lines)
+		while (j < m_cg->token_per_lines)
 		{
-			mp_cds[i][j].x = mp_cds[i][j].x * ZOOM;
-			mp_cds[i][j].y = mp_cds[i][j].y * ZOOM;
-			mp_cds[i][j].z = mp_cds[i][j].z * ZOOM - 100;
-			mp_cds[i][j].x += SHIFT_OFFSET;
-			mp_cds[i][j].y += SHIFT_OFFSET;
-			mp_cds[i][j].z += SHIFT_OFFSET;
+			m_cd[i][j] = project_iso(m_cd[i][j], m_cg, mx);
 			j++;
 		}
 		i++;
 	}
-	draw_lines(mp, mp_cds, map_cfg);
+	draw_lines(mp, m_cd, m_cg);
 }
 
 static void	render_next_frame(t_map *map_cfg, t_points **map_cords, t_mlx *mx)
@@ -56,8 +51,8 @@ static void	render_next_frame(t_map *map_cfg, t_points **map_cords, t_mlx *mx)
 	mp = calloc(sizeof(t_img_data), 1);
 	mp->img = mlx_new_image(mx->mlx_ptr, X, Y);
 	mp->addr = mlx_get_data_addr(mp->img, &mp->bit_l, &mp->line_l, &mp->endian);
-	render_grid(mp, map_cfg, map_cords);
-	mlx_put_image_to_window(mx->mlx_ptr, mx->window, mp->img, X / 4, Y / 4);
+	render_grid(mp, map_cfg, map_cords, mx);
+	mlx_put_image_to_window(mx->mlx_ptr, mx->window, mp->img, 0, 0);
 	mlx_destroy_image(mx->mlx_ptr, mp->img);
 	free(mp);
 }
