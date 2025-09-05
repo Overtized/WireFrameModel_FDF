@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:34:23 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 14:10:31 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:14:40 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,9 @@ static bool	test_map_validity(char *buf)
 			hex_flag = 1;
 		i++;
 	}
-	if (hex_flag == 1)
-	{
-		if (!check_hex_comb(buf))
-			return (false);
-	}
-	else if (hex_flag == 0 && hex_char == 1)
+	if (hex_flag == 1 && !check_hex_comb(buf))
+		return (false);
+	if (hex_flag == 0 && hex_char == 1)
 		return (false);
 	return (true);
 }

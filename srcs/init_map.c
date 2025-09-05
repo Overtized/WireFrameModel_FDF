@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:12:52 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 15:02:25 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:16:54 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,9 @@ static void	load_struct(char **split, t_points **map_param, int i)
 {
 	char	*comma;
 	int		j;
-	char	*base = "0123456789ABCDEF";
+	char	*base;
 
+	base = "0123456789ABCDEF";
 	j = 0;
 	while (split[j])
 	{

@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:14:14 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 14:22:11 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:19:23 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 t_points	*zoom_pt(t_points *pt, t_map *map, t_mlx *mlx)
 {
-
 	int	zoom_x;
 	int	zoom_y;
-	int zoom;
+	int	zoom;
 
 	zoom_x = X / map->token_per_lines;
 	zoom_y = Y / map->rows;
@@ -25,7 +24,7 @@ t_points	*zoom_pt(t_points *pt, t_map *map, t_mlx *mlx)
 		zoom = zoom_x;
 	else
 		zoom = zoom_y;
-	if(map->rows < 100)
+	if (map->rows < 100)
 		zoom = zoom * 0.5;
 	else if (map->rows >= 100)
 		zoom = zoom * 0.75;
@@ -35,6 +34,7 @@ t_points	*zoom_pt(t_points *pt, t_map *map, t_mlx *mlx)
 	mlx->zoom = zoom;
 	return (pt);
 }
+
 t_points	*shift_pt(t_points *pt, t_map *map, t_mlx *mlx)
 {
 	int	shift_x;
@@ -48,7 +48,7 @@ t_points	*shift_pt(t_points *pt, t_map *map, t_mlx *mlx)
 	shift_y = (Y - height) / 2;
 	pt->x += shift_x;
 	pt->y += shift_y;
-	mlx->offset_x = shift_x; 
-	mlx->offset_y = shift_y; 
+	mlx->offset_x = shift_x;
+	mlx->offset_y = shift_y;
 	return (pt);
 }

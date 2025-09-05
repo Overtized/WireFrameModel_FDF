@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 14:41:30 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:19:39 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool	mlx_setup(t_map *map_cfg, t_points **map_coords, t_mlx	*mlx)
 	if (!mlx->mlx_ptr)
 		return (free(mlx->mlx_ptr), false);
 	mlx->window = mlx_new_window(mlx->mlx_ptr, X, Y, "Fdf");
-	if(mlx->window == NULL)
+	if (mlx->window == NULL)
 		return (free(mlx->mlx_ptr), false);
 	mlx_hook(mlx->window, ON_DESTROY, 0L, red_cross_mlx, mlx);
 	mlx_key_hook(mlx->window, esc_mlx, mlx);

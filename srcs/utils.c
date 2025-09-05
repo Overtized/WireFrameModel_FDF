@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/04 19:52:08 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:18:08 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,17 @@ void	draw_lines(t_img_data *m, t_points **p, t_map *mp)
 
 t_points	project_iso(t_points pt, t_map *map, t_mlx *mlx)
 {
-	float angle;
-	float xf;
-	float yf;
+	float	angle;
+	float	xf;
+	float	yf;
 
 	angle = (30.0 * PI) / 180.0;
 	zoom_pt (&pt, map, mlx);
-	xf = (float)(pt.x - pt.y) * cosf(angle);
-	yf = (float)(pt.x + pt.y) * sinf(angle) - (float)pt.z;
+	xf = (float)(pt.x - pt.y) *cosf(angle);
+	yf = (float)(pt.x + pt.y) *sinf(angle) - (float)pt.z;
 	pt.x = (int) xf;
 	pt.y = (int) yf;
 	pt.z = 0;
 	shift_pt(&pt, map, mlx);
-	return(pt);
+	return (pt);
 }
