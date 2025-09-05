@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/04 19:46:23 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 14:48:12 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ bool		mlx_setup(t_map *map_cfg, t_points **map_coords, t_mlx	*mlx);
 void		ft_put_pixel(t_img_data *map, int x, int y, int color);
 void		draw_lines(t_img_data *m, t_points **p, t_map *mpm);
 t_points	project_iso(t_points pt, t_map *map, t_mlx *mlx);
-t_points	**allocate_map(t_map *gridsize, t_points **coordonates);
+bool	allocate_map(t_map *gridsize, t_points ***coordonates);
 t_points	*zoom_pt(t_points *pt, t_map *map, t_mlx *mlx);
 t_points	*shift_pt(t_points *pt, t_map *map, t_mlx *mlx);
 //

@@ -94,6 +94,7 @@ SRC = $(addprefix $(SRC_DIR)/, ft_atoi.c \
 								ft_strtrim.c \
 								ft_substr.c \
 								ft_tolower.c \
+								str_toupper.c \
 								ft_toupper.c )
 SHARED = $(addprefix $(SHARED_DIR)/, )
 BONUS_SRC = $(addprefix $(BONUS_DIR)/, )

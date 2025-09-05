@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:21:44 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/04 19:56:16 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:00:50 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	main(int ac, char *av[])
 	t_mlx		mlx;
 
 	map = ft_calloc(1, sizeof(t_map));
+	if (!map)
+		return (1);
 	if (!handle_errors(ac, av[1], map))
 		return (ft_free_map(map), 1);
 	if (!init_map(av[1], map))
 		return (ft_printf(1, "init failed\n"), ft_free_map(map), 1);
-	map_pt = NULL;
-	map_pt = allocate_map(map, map_pt);
-	if (map_pt == NULL)
+	if (!allocate_map(map, &map_pt))
 		return (ft_free_structs(map, map_pt), 1);
 	if (!load_map(map->map, map_pt, map))
 		return (ft_printf(1, "parsing error \n"), 1);

@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:20:01 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/04 19:51:20 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:07:38 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@ void	ft_free_double_char(char **commands)
 	int	i;
 
 	i = 0;
-	if (!commands && !*commands)
+	if (!commands)
 		return ;
 	while (commands[i])
 	{
 		free (commands[i]);
 		i++;
 	}
-	if (commands)
-		free (commands);
+	free (commands);
 }
 
 static void	ft_free_args(t_map *map_config, t_points **map_params)
@@ -33,7 +32,7 @@ static void	ft_free_args(t_map *map_config, t_points **map_params)
 	int	i;
 
 	i = 0;
-	if (!map_params)
+	if (!map_params || map_config)
 		return ;
 	while (i < map_config->rows)
 	{
@@ -45,6 +44,8 @@ static void	ft_free_args(t_map *map_config, t_points **map_params)
 
 void	ft_free_map(t_map *map_config)
 {
+	if (!map_config)
+		return ;
 	if (map_config->map)
 	{
 		free(map_config->map);

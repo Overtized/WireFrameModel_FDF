@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:34:23 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/04 15:57:11 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 14:10:31 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static bool	test_map_validity(char *buf)
 	i = 0;
 	hex_flag = 0;
 	hex_char = 0;
+	if (!buf)
+		return (false);
 	while (buf[i])
 	{
 		if (!ft_isdigit_space(buf[i]) && !ft_ishex(buf[i]))
@@ -106,9 +108,9 @@ static bool	test_map(char *map, t_map *map_strct)
 	map_strct->map = ft_strdup(buffer);
 	free(buffer);
 	if (!test_map_validity(map_strct->map))
-		return (free(map_strct->map), false);
+		return (false);
 	if (!test_int(map_strct->map))
-		return (free(map_strct->map), false);
+		return (false);
 	return (close(fd), true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:14:14 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/04 20:06:54 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 14:22:11 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_points	*zoom_pt(t_points *pt, t_map *map, t_mlx *mlx)
 		zoom = zoom * 0.75;
 	pt->x = pt->x * zoom;
 	pt->y = pt->y * zoom;
-	pt->z = pt->z * (zoom * 0.3);
+	pt->z = pt->z * (zoom * 0.04);
 	mlx->zoom = zoom;
 	return (pt);
 }

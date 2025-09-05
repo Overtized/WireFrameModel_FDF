@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:12:52 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/04 16:40:11 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:02:25 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,30 @@ static int	get_token_number(char *line)
 	return (token);
 }
 
-t_points	**allocate_map(t_map *map, t_points **map_point)
+bool	allocate_map(t_map *map, t_points ***map_point)
 {
 	int	i;
 
 	i = 0;
-	map_point = malloc(sizeof(t_points *) * map->rows);
-	if (!map_point)
-		return (NULL);
+	*map_point = malloc(sizeof(t_points *) * map->rows);
+	if (!*map_point)
+		return (false);
 	while (i < map->rows)
 	{
-		map_point[i] = malloc(sizeof(t_points) * map->token_per_lines);
-		if (!map_point[i])
+		(*map_point)[i] = malloc(sizeof(t_points) * map->token_per_lines);
+		if (!(*map_point)[i])
 		{
 			while (i > 0)
 			{
-				free(map_point[i]);
-				free(map_point);
+				free((*map_point)[i]);
+				free(*map_point);
 				i--;
-				return (NULL);
 			}
+			return (false);
 		}
 		i++;
 	}
-	return (map_point);
+	return (true);
 }
 
 bool	init_map(char *raw_map, t_map *map_config)
@@ -97,6 +97,7 @@ static void	load_struct(char **split, t_points **map_param, int i)
 {
 	char	*comma;
 	int		j;
+	char	*base = "0123456789ABCDEF";
 
 	j = 0;
 	while (split[j])
@@ -105,7 +106,7 @@ static void	load_struct(char **split, t_points **map_param, int i)
 		if (comma)
 		{
 			map_param[i][j].z = ft_atoi(split[j]);
-			map_param[i][j].color = ft_atoi_base(comma + 3, "0123456789ABCDEF");
+			map_param[i][j].color = ft_atoi_base(str_toupper(comma + 3), base);
 		}
 		else
 		{
