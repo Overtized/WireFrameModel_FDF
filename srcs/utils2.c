@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:14:14 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 15:19:23 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:45:19 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,29 @@ t_points	*shift_pt(t_points *pt, t_map *map, t_mlx *mlx)
 	mlx->offset_x = shift_x;
 	mlx->offset_y = shift_y;
 	return (pt);
+}
+
+int	key_mlx(int keycode, t_mlx *mlx)
+{
+	if (keycode == 0xff1b) // escape
+		mlx_loop_end(mlx->mlx_ptr);
+	if (keycode == 0xff1b) // zoom +
+		mlx->zoom *= 1,1;
+	if (keycode == 0x002d) // zoom -
+		mlx->zoom /= 1,1;
+	// if (keycode == 0xff52) // up
+	// 	mlx->shift /= 1,1;
+	// if (keycode == 0xff54) // down
+	// 	mlx->shift /= 1,1;
+	// if (keycode == 0xff53) // right
+	// 	mlx->shift /= 1,1;
+	// if (keycode == 0xff51) // left
+	// 	mlx->shift /= 1,1;
+	return (0);
+}
+
+int	red_cross_mlx(t_mlx *mlx)
+{
+	mlx_loop_end(mlx->mlx_ptr);
+	return (0);
 }

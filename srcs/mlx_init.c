@@ -6,25 +6,17 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 15:19:39 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:29:03 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static int	esc_mlx(int keycode, t_mlx *mlx)
+static void	trigger_hooks(t_mlx *mlx)
 {
-	if (keycode == 65307)
-		mlx_loop_end(mlx->mlx_ptr);
-	return (0);
+	mlx_hook(mlx->window, ON_DESTROY, 0L, red_cross_mlx, mlx);
+	mlx_key_hook(mlx->window, key_mlx, mlx);
 }
-
-static int	red_cross_mlx(t_mlx *mlx)
-{
-	mlx_loop_end(mlx->mlx_ptr);
-	return (0);
-}
-
 static void	render_grid(t_img_data *mp, t_map *m_cg, t_points **m_cd, t_mlx *mx)
 {
 	int	i;
@@ -68,8 +60,7 @@ bool	mlx_setup(t_map *map_cfg, t_points **map_coords, t_mlx	*mlx)
 	mlx->window = mlx_new_window(mlx->mlx_ptr, X, Y, "Fdf");
 	if (mlx->window == NULL)
 		return (free(mlx->mlx_ptr), false);
-	mlx_hook(mlx->window, ON_DESTROY, 0L, red_cross_mlx, mlx);
-	mlx_key_hook(mlx->window, esc_mlx, mlx);
+	trigger_hooks(mlx);
 	if (!render_next_frame(map_cfg, map_coords, mlx))
 	{
 		mlx_destroy_window(mlx->mlx_ptr, mlx->window);
@@ -83,10 +74,3 @@ bool	mlx_setup(t_map *map_cfg, t_points **map_coords, t_mlx	*mlx)
 	free(mlx->mlx_ptr);
 	return (true);
 }
-
-// static void garbage (void)
-// {
-// 	// mlx_loop_hook(mlx->mlx_ptr, render_next_frame, mlx);
-// 	// mlx_sync()
-// 	// une fonction pour regrouper hook keyhook et loop si besoin place
-// }
