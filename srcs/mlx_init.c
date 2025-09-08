@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 15:29:03 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/08 14:58:13 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ bool	mlx_setup(t_map *map_cfg, t_points **map_coords, t_mlx	*mlx)
 {
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
-		return (free(mlx->mlx_ptr), false);
+		return (false);
 	mlx->window = mlx_new_window(mlx->mlx_ptr, X, Y, "Fdf");
-	if (mlx->window == NULL)
+	if (!mlx->window)
 		return (free(mlx->mlx_ptr), false);
 	trigger_hooks(mlx);
 	if (!render_next_frame(map_cfg, map_coords, mlx))

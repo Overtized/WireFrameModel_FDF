@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:12:52 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 15:16:54 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/08 15:11:15 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ bool	allocate_map(t_map *map, t_points ***map_point)
 			while (i > 0)
 			{
 				free((*map_point)[i]);
-				free(*map_point);
 				i--;
 			}
+			free(*map_point);
 			return (false);
 		}
 		i++;

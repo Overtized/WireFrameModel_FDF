@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:14:14 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 15:45:19 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/08 14:24:27 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_points	*zoom_pt(t_points *pt, t_map *map, t_mlx *mlx)
 		zoom = zoom * 0.75;
 	pt->x = pt->x * zoom;
 	pt->y = pt->y * zoom;
-	pt->z = pt->z * (zoom * 0.04);
+	pt->z = pt->z * (zoom * 0.3);
 	mlx->zoom = zoom;
 	return (pt);
 }
@@ -57,10 +57,10 @@ int	key_mlx(int keycode, t_mlx *mlx)
 {
 	if (keycode == 0xff1b) // escape
 		mlx_loop_end(mlx->mlx_ptr);
-	if (keycode == 0xff1b) // zoom +
-		mlx->zoom *= 1,1;
-	if (keycode == 0x002d) // zoom -
-		mlx->zoom /= 1,1;
+	// if (keycode == 0xff1b) // zoom +
+	// 	mlx->zoom *= 1,1;
+	// if (keycode == 0x002d) // zoom -
+	// 	mlx->zoom /= 1,1;
 	// if (keycode == 0xff52) // up
 	// 	mlx->shift /= 1,1;
 	// if (keycode == 0xff54) // down

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:20:01 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 15:07:38 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/08 14:50:54 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ static void	ft_free_args(t_map *map_config, t_points **map_params)
 	int	i;
 
 	i = 0;
-	if (!map_params || map_config)
+	if (!map_params || !map_config)
 		return ;
 	while (i < map_config->rows)
 	{
-		free((map_params[i]));
+		if (map_params[i])
+			free((map_params[i]));
 		i++;
 	}
 	free((map_params));
@@ -60,5 +61,4 @@ void	ft_free_structs(t_map *map_config, t_points **map_coords)
 		ft_free_args(map_config, map_coords);
 	}
 	ft_free_map(map_config);
-	(void)map_coords;
 }
