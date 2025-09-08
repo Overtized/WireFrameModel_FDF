@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 15:29:42 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/08 17:41:37 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*window;
-	int		zoom;
+	float		zoom;
 	int		offset_x;
 	int		offset_y;
 }				t_mlx;
@@ -69,9 +69,10 @@ bool		allocate_map(t_map *gridsize, t_points ***coordonates);
 void		ft_put_pixel(t_img_data *map, int x, int y, int color);
 void		draw_lines(t_img_data *m, t_points **p, t_map *mpm);
 t_points	project_iso(t_points pt, t_map *map, t_mlx *mlx);
-t_points	*zoom_pt(t_points *pt, t_map *map, t_mlx *mlx);
+t_points	zoom_pt(t_points pt, t_mlx *mlx);
 t_points	*shift_pt(t_points *pt, t_map *map, t_mlx *mlx);
 int			red_cross_mlx(t_mlx *mlx);
-int			key_mlx(int keycode, t_mlx *mlx);
+int			key_mlx(int keycode, t_mlx *mlx, t_map *map_cfg, t_points **map_coords);
+bool		render_frame(t_map *map_cfg, t_points **map_cords, t_mlx *mx);
 //
 #endif

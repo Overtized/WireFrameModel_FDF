@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 15:18:08 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:27:43 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,16 @@ t_points	project_iso(t_points pt, t_map *map, t_mlx *mlx)
 	float	angle;
 	float	xf;
 	float	yf;
+	t_points	scaled;
 
 	angle = (30.0 * PI) / 180.0;
-	zoom_pt (&pt, map, mlx);
-	xf = (float)(pt.x - pt.y) *cosf(angle);
-	yf = (float)(pt.x + pt.y) *sinf(angle) - (float)pt.z;
-	pt.x = (int) xf;
-	pt.y = (int) yf;
-	pt.z = 0;
-	shift_pt(&pt, map, mlx);
-	return (pt);
+	scaled = zoom_pt (pt, mlx);
+	xf = (float)(scaled.x - scaled.y) *cosf(angle);
+	yf = (float)(scaled.x + scaled.y) *sinf(angle) - (float)scaled.z;
+	scaled.x = (int) xf;
+	scaled.y = (int) yf;
+	scaled.z *= 0;
+	shift_pt(&scaled, map, mlx);
+	(void)map;
+	return (scaled);
 }
