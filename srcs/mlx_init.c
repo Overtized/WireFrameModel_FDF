@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/08 17:09:58 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:00:39 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,57 +18,56 @@ static void	trigger_hooks(t_mlx *mlx)
 	mlx_hook(mlx->window, 2, 1L<<0, key_mlx, mlx);
 
 }
-static void	render_grid(t_img_data *mp, t_map *m_cg, t_points **m_cd, t_mlx *mx)
+int	render_loop(t_mlx *mlx)
+{
+	if (mlx->redraw)
+	{
+		render_frame(mlx);
+		mlx->redraw = false;
+	}
+	return(0);
+}
+static void	render_grid(t_mlx *mx)
 {
 	int	i;
-	int	j;
+	int	shift_x;
+	int	shift_y;
 
 	i = 0;
-	while (i < m_cg->rows)
-	{
-		j = 0;
-		while (j < m_cg->token_per_lines)
-		{
-			m_cd[i][j] = project_iso(m_cd[i][j], m_cg, mx);
-			j++;
-		}
-		i++;
-	}
-	draw_lines(mp, m_cd, m_cg);
+	projection(mx);
+	check_map_bounds(mx, &shift_x, &shift_y, i);
+	mx->offset_x = shift_x;
+	mx->offset_y = shift_y;
+	shift(mx, mx->offset_x, mx->offset_y, i);
+	i = 0;
+	draw_lines(&mx->img, mx->map_cds, mx->map_cfg);
 }
 
-bool	render_frame(t_map *map_cfg, t_points **map_cords, t_mlx *mx)
+bool	render_frame(t_mlx *mx)
 {
-	t_img_data	*mp;
-
-	mp = calloc(sizeof(t_img_data), 1);
-	if (!mp)
+	if (mx->img.img)
+		mlx_destroy_image(mx->mlx_ptr, mx->img.img);
+	mx->img.img = mlx_new_image(mx->mlx_ptr, X, Y);
+	if (!mx->img.img)
 		return (false);
-	mp->img = mlx_new_image(mx->mlx_ptr, X, Y);
-	mp->addr = mlx_get_data_addr(mp->img, &mp->bit_l, &mp->line_l, &mp->endian);
-	render_grid(mp, map_cfg, map_cords, mx);
-	mlx_put_image_to_window(mx->mlx_ptr, mx->window, mp->img, 0, 0);
-	mlx_destroy_image(mx->mlx_ptr, mp->img);
-	free(mp);
+	mx->img.addr = mlx_get_data_addr(mx->img.img, &mx->img.bit_l, &mx->img.line_l, &mx->img.endian);
+	render_grid(mx);
+	mlx_put_image_to_window(mx->mlx_ptr, mx->window, mx->img.img, 0, 0);
 	return (true);
 }
 
-bool	mlx_setup(t_map *map_cfg, t_points **map_coords, t_mlx	*mlx)
+bool	mlx_setup(t_mlx	*mlx)
 {
-	mlx->zoom = 20;
+	mlx->zoom = 1;
+	mlx->redraw = true;
+	mlx->img.img = NULL;
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
 		return (false);
 	mlx->window = mlx_new_window(mlx->mlx_ptr, X, Y, "Fdf");
 	if (!mlx->window)
 		return (free(mlx->mlx_ptr), false);
-	if (!render_frame(map_cfg, map_coords, mlx))
-	{
-		mlx_destroy_window(mlx->mlx_ptr, mlx->window);
-		mlx_destroy_display(mlx->mlx_ptr);
-		free(mlx->mlx_ptr);
-		return (false);
-	}
+	mlx_loop_hook(mlx->mlx_ptr, render_loop, mlx);
 	trigger_hooks(mlx);
 	mlx_loop(mlx->mlx_ptr);
 	mlx_destroy_window(mlx->mlx_ptr, mlx->window);

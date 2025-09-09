@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/08 18:27:43 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:10:57 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,22 @@ void	draw_lines(t_img_data *m, t_points **p, t_map *mp)
 	}
 }
 
-t_points	project_iso(t_points pt, t_map *map, t_mlx *mlx)
+t_points	project_iso(t_points pt, t_mlx *mlx)
 {
 	float	angle;
 	float	xf;
 	float	yf;
-	t_points	scaled;
+	t_points scaled;
 
+	scaled = pt;
 	angle = (30.0 * PI) / 180.0;
-	scaled = zoom_pt (pt, mlx);
+	scaled.x = pt.x * mlx->zoom;
+	scaled.y = pt.y * mlx->zoom;
+	scaled.z = pt.z * mlx->zoom;
 	xf = (float)(scaled.x - scaled.y) *cosf(angle);
 	yf = (float)(scaled.x + scaled.y) *sinf(angle) - (float)scaled.z;
 	scaled.x = (int) xf;
 	scaled.y = (int) yf;
-	scaled.z *= 0;
-	shift_pt(&scaled, map, mlx);
-	(void)map;
+	scaled.z = 0;
 	return (scaled);
 }

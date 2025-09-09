@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/08 17:41:37 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:46:08 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,6 @@ typedef struct s_img_data {
 	int		line_l;
 	int		endian;
 }				t_img_data;
-typedef struct s_mlx
-{
-	void	*mlx_ptr;
-	void	*window;
-	float		zoom;
-	int		offset_x;
-	int		offset_y;
-}				t_mlx;
 typedef struct s_points
 {
 	int			x;
@@ -54,6 +46,25 @@ typedef struct s_map
 	int			token_per_lines;
 	char		*map;
 }				t_map;
+typedef struct s_mlx
+{
+	void	*mlx_ptr;
+	void	*window;
+	t_img_data	img;
+	t_points **map_cds;
+	t_map *map_cfg;
+	float		zoom;
+	int		offset_x;
+	int		offset_y;
+	bool	redraw;
+}				t_mlx;
+typedef struct s_mp_bd
+{
+	int	min_x;
+	int	min_y;
+	int	max_x;
+	int	max_y;
+}	t_mp_bd;
 bool		test_input(char *map, t_map *map_strct);
 bool		test_int(char *buffer);
 //
@@ -64,15 +75,16 @@ void		ft_free_map(t_map *map_config);
 void		ft_free_structs(t_map *map_config, t_points **map_coords);
 bool		handle_errors(int ac, char *av, t_map *map);
 //
-bool		mlx_setup(t_map *map_cfg, t_points **map_coords, t_mlx	*mlx);
+bool		mlx_setup( t_mlx	*mlx);
 bool		allocate_map(t_map *gridsize, t_points ***coordonates);
 void		ft_put_pixel(t_img_data *map, int x, int y, int color);
 void		draw_lines(t_img_data *m, t_points **p, t_map *mpm);
-t_points	project_iso(t_points pt, t_map *map, t_mlx *mlx);
-t_points	zoom_pt(t_points pt, t_mlx *mlx);
-t_points	*shift_pt(t_points *pt, t_map *map, t_mlx *mlx);
+t_points	project_iso(t_points pt, t_mlx *mlx);
 int			red_cross_mlx(t_mlx *mlx);
-int			key_mlx(int keycode, t_mlx *mlx, t_map *map_cfg, t_points **map_coords);
-bool		render_frame(t_map *map_cfg, t_points **map_cords, t_mlx *mx);
+int			key_mlx(int keycode, t_mlx *mlx);
+bool		render_frame(t_mlx *mx);
+void		check_map_bounds(t_mlx *mx, int *shift_x, int *shift_y, int i);
+void		shift(t_mlx *mx, int shift_x, int shift_y, int i);
+void		projection(t_mlx *mx);
 //
 #endif
