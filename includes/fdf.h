@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/09 17:46:08 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/09 21:04:52 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ typedef struct s_mlx
 	float		zoom;
 	int		offset_x;
 	int		offset_y;
+	int		new_offset_x;
+	int		new_offset_y;
+	int		proj_type;
 	bool	redraw;
 }				t_mlx;
 typedef struct s_mp_bd
@@ -75,16 +78,20 @@ void		ft_free_map(t_map *map_config);
 void		ft_free_structs(t_map *map_config, t_points **map_coords);
 bool		handle_errors(int ac, char *av, t_map *map);
 //
+t_points	project_iso(t_points pt, t_mlx *mlx);
 bool		mlx_setup( t_mlx	*mlx);
 bool		allocate_map(t_map *gridsize, t_points ***coordonates);
 void		ft_put_pixel(t_img_data *map, int x, int y, int color);
-void		draw_lines(t_img_data *m, t_points **p, t_map *mpm);
-t_points	project_iso(t_points pt, t_mlx *mlx);
+void		draw_iso(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx);
+void		zoom_parallel(t_points *pt, t_mlx *mlx);
+void		check_map_bounds(t_mlx *mx, int *shift_x, int *shift_y, int i);
+void		shift(t_points *pt, t_mlx *mlx);
+void		projection(t_mlx *mx);
+void		draw(t_img_data *m, t_points a, t_points b, t_mlx *mlx);
+void		ft_draw_line(t_img_data *m, t_points p1, t_points p2, int tmp_e);
+bool		render_frame(t_mlx *mx);
 int			red_cross_mlx(t_mlx *mlx);
 int			key_mlx(int keycode, t_mlx *mlx);
-bool		render_frame(t_mlx *mx);
-void		check_map_bounds(t_mlx *mx, int *shift_x, int *shift_y, int i);
-void		shift(t_mlx *mx, int shift_x, int shift_y, int i);
-void		projection(t_mlx *mx);
+void		draw_parallel(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx);
 //
 #endif

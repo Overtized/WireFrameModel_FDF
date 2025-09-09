@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/09 17:10:57 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/09 21:05:01 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	init_dir(t_points p1, t_points p2, int *dir_x, int *dir_y)
 		*dir_y = -1;
 }
 
-static void	ft_draw_line(t_img_data *m, t_points p1, t_points p2, int tmp_e)
+void	ft_draw_line(t_img_data *m, t_points p1, t_points p2, int tmp_e)
 {
 	int	dx;
 	int	dy;
@@ -65,10 +65,11 @@ static void	ft_draw_line(t_img_data *m, t_points p1, t_points p2, int tmp_e)
 	}
 }
 
-void	draw_lines(t_img_data *m, t_points **p, t_map *mp)
+void	draw_iso(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx)
 {
 	int	row;
 	int	col;
+	// t_points proj;
 
 	row = 0;
 	col = 0;
@@ -77,16 +78,47 @@ void	draw_lines(t_img_data *m, t_points **p, t_map *mp)
 		col = 0;
 		while (col < mp->token_per_lines)
 		{
+			// proj = project_iso(p[row][col], mlx);
+			// shift(&proj, mlx);
 			if (col < mp->token_per_lines - 1)
-				ft_draw_line(m, p[row][col], p[row][col + 1], 0);
+				draw(m, p[row][col], p[row][col + 1], mlx);
 			if (row < mp->rows -1)
-				ft_draw_line(m, p[row][col], p[row + 1][col], 0);
+				draw(m, p[row][col], p[row + 1][col], mlx);
 			col++;
 		}
 		row++;
 	}
 }
+void	draw_parallel(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx)
+{
+	int row;
+	int col;
+	// t_points scaled;
 
+	row = 0;
+	col = 0;
+	while (row < mp->rows)
+	{
+		col = 0;
+		// scaled = zoom_parallel(p[row][col], mlx);
+		// shift(&scaled, mlx);
+		while (col < mp->token_per_lines)
+		{
+			if (col < mp->token_per_lines - 1)
+				draw(m, p[row][col], p[row][col + 1], mlx);
+			if (row < mp->rows -1)
+				draw(m, p[row][col], p[row + 1][col], mlx);
+			col++;
+		}
+		row++;
+	}
+}
+void	zoom_parallel(t_points *pt, t_mlx *mlx)
+{
+	pt->x = pt->x * mlx->zoom;
+	pt->y = pt->y * mlx->zoom;
+	pt->z = pt->z * mlx->zoom;
+}
 t_points	project_iso(t_points pt, t_mlx *mlx)
 {
 	float	angle;

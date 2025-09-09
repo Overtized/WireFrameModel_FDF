@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/09 18:00:39 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/09 20:49:21 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	trigger_hooks(t_mlx *mlx)
 {
 	mlx_hook(mlx->window, ON_DESTROY, 0L, red_cross_mlx, mlx);
 	mlx_hook(mlx->window, 2, 1L<<0, key_mlx, mlx);
-
 }
 int	render_loop(t_mlx *mlx)
 {
@@ -34,13 +33,13 @@ static void	render_grid(t_mlx *mx)
 	int	shift_y;
 
 	i = 0;
-	projection(mx);
 	check_map_bounds(mx, &shift_x, &shift_y, i);
 	mx->offset_x = shift_x;
 	mx->offset_y = shift_y;
-	shift(mx, mx->offset_x, mx->offset_y, i);
-	i = 0;
-	draw_lines(&mx->img, mx->map_cds, mx->map_cfg);
+	if (mx->proj_type == 1)
+		draw_iso(&mx->img, mx->map_cds, mx->map_cfg, mx);
+	else if (mx->proj_type == 0)
+		draw_parallel(&mx->img, mx->map_cds, mx->map_cfg, mx);
 }
 
 bool	render_frame(t_mlx *mx)
@@ -58,9 +57,12 @@ bool	render_frame(t_mlx *mx)
 
 bool	mlx_setup(t_mlx	*mlx)
 {
-	mlx->zoom = 1;
+	mlx->zoom = 20;
 	mlx->redraw = true;
 	mlx->img.img = NULL;
+	mlx->new_offset_x = 0;
+	mlx->new_offset_y = 0;
+	mlx->proj_type = 1;
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
 		return (false);
@@ -70,6 +72,8 @@ bool	mlx_setup(t_mlx	*mlx)
 	mlx_loop_hook(mlx->mlx_ptr, render_loop, mlx);
 	trigger_hooks(mlx);
 	mlx_loop(mlx->mlx_ptr);
+	if (mlx->img.img)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->img.img);
 	mlx_destroy_window(mlx->mlx_ptr, mlx->window);
 	mlx_destroy_display(mlx->mlx_ptr);
 	free(mlx->mlx_ptr);
