@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 13:02:56 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 13:02:44 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "./fdf_bonus.h"
 
 static void	init_dir(t_points p1, t_points p2, int *dir_x, int *dir_y)
 {
@@ -105,7 +105,7 @@ t_points	project_iso(t_points pt, t_mlx *mlx)
 	angle = (30.0 * PI) / 180.0;
 	scaled.x = pt.x * mlx->zoom;
 	scaled.y = pt.y * mlx->zoom;
-	scaled.z = pt.z * mlx->zoom;
+	scaled.z = pt.z * (mlx->zoom / 2);
 	xf = (float)(scaled.x - scaled.y) *cosf(angle);
 	yf = (float)(scaled.x + scaled.y) *sinf(angle) - (float)scaled.z;
 	scaled.x = (int) xf;

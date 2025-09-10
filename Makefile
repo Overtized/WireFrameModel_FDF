@@ -24,7 +24,7 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror -g3 -O0 
 MLX_FLAG = -L$(SHARED_DIR) -lmlx -lXext -lX11 -lm -lz
 INCLUDES = -I./includes -I./minilibx-linux
-INCLUDES_bonus = -I./bonus
+INCLUDES_BONUS = -I./bonus -I./minilibx-linux
 
 # **************************************************************************** #
 #                                Directories                                   #
@@ -34,7 +34,6 @@ SRC_DIR = srcs
 SHARED_DIR = minilibx-linux
 OBJ_DIR = obj
 LIBFT_DIR = Libft
-PRINTF_DIR = 
 BONUS_DIR = bonus
 
 # **************************************************************************** #
@@ -45,7 +44,10 @@ SRC = $(addprefix $(SRC_DIR)/, main.c check_map.c init_map.c handle_errors.c \
 								clear_args.c mlx_init.c utils.c utils2.c \
 								utils3.c )
 SHARED = $(addprefix $(SHARED_DIR)/, )
-BONUS_SRC = $(addprefix $(BONUS_DIR)/, )
+BONUS_SRC = $(addprefix $(BONUS_DIR)/,main_bonus.c check_map_bonus.c \
+									init_map_bonus.c handle_errors_bonus.c \
+								clear_args_bonus.c mlx_init_bonus.c \
+								utils_bonus.c utils2_bonus.c utils3_bonus.c )
 # **************************************************************************** #
 #                                Objects                                       #
 # **************************************************************************** #
@@ -53,7 +55,6 @@ BONUS_SRC = $(addprefix $(BONUS_DIR)/, )
 Objects = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 SHARED_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SHARED:.c=.o)))
 BONUS_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(BONUS_SRC:.c=.o)))
-ALL_BONUS_OBJ = $(BONUS_OBJ) $(SHARED_OBJ)
 
 # **************************************************************************** #
 #                                Printf                                        #
@@ -81,7 +82,7 @@ $(NAME): $(Objects) $(SHARED_OBJ)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@ 
-# attention tu as supprime la var flags dans la compil obj
+# si tu veux supprimer les flags c'est ici
 
 $(OBJ_DIR)/%.o: $(BONUS_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
@@ -91,10 +92,10 @@ $(OBJ_DIR)/%.o: $(SHARED_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
-bonus: $(ALL_BONUS_OBJ)
+bonus: $(BONUS_OBJ) $(SHARED_OBJ)
 	@make -C $(LIBFT_DIR)
 	@make -C $(SHARED_DIR)
-	$(CC) $(FLAGS) $(INCLUDES_bonus) $(ALL_BONUS_OBJ) $(LIBFT) -o $(NAME)_bonus
+	$(CC) $(FLAGS) $(INCLUDES_BONUS) $(BONUS_OBJ) $(SHARED_OBJ) $(LIBFT) $(MLX_FLAG) -o $(NAME)_bonus
 
 # **************************************************************************** #
 #                                CLEAN & RE                                    #

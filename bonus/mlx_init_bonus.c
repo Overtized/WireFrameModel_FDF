@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_init.c                                         :+:      :+:    :+:   */
+/*   mlx_init_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 12:32:42 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 12:13:07 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "./fdf_bonus.h"
 
 static void	trigger_hooks(t_mlx *mlx)
 {
@@ -38,7 +38,9 @@ static void	render_grid(t_mlx *mx)
 	check_map_bounds(mx, &shift_x, &shift_y, i);
 	mx->offset_x = shift_x;
 	mx->offset_y = shift_y;
-	if (mx->proj_type == 0)
+	if (mx->proj_type == 1)
+		draw_iso(&mx->img, mx->map_cds, mx->map_cfg, mx);
+	else if (mx->proj_type == 0)
 		draw_parallel(&mx->img, mx->map_cds, mx->map_cfg, mx);
 }
 
@@ -63,7 +65,7 @@ bool	mlx_setup(t_mlx	*mlx)
 	mlx->img.img = NULL;
 	mlx->new_offset_x = 0;
 	mlx->new_offset_y = 0;
-	mlx->proj_type = 0;
+	mlx->proj_type = 1;
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
 		return (false);
