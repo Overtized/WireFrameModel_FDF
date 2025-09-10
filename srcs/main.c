@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:21:44 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/09 19:34:24 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 12:06:52 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	main(int ac, char *av[])
 		return (ft_free_structs(map, map_pt), 1);
 	if (!load_map(map->map, map_pt, map))
 		return (ft_printf(1, "parsing error \n"), 1);
-	mlx.map_cds = map_pt; 
+	mlx.map_cds = map_pt;
 	mlx.map_cfg = map;
-	if (!mlx_setup( &mlx))
+	if (!mlx_setup(&mlx))
 		return (ft_free_structs(map, map_pt), 1);
 	ft_free_structs(map, map_pt);
 	return (0);

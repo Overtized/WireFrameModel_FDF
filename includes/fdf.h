@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/09 21:04:52 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 12:00:43 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,25 +73,22 @@ bool		test_int(char *buffer);
 //
 bool		init_map(char *file, t_map *map_config);
 bool		load_map(char *map, t_points **map_param, t_map *map_struct);
+bool		allocate_map(t_map *gridsize, t_points ***coordonates);
 //
 void		ft_free_map(t_map *map_config);
 void		ft_free_structs(t_map *map_config, t_points **map_coords);
 bool		handle_errors(int ac, char *av, t_map *map);
 //
-t_points	project_iso(t_points pt, t_mlx *mlx);
 bool		mlx_setup( t_mlx	*mlx);
-bool		allocate_map(t_map *gridsize, t_points ***coordonates);
+bool		render_frame(t_mlx *mx);
+int			key_mlx(int keycode, t_mlx *mlx);
+int			red_cross_mlx(t_mlx *mlx);
 void		ft_put_pixel(t_img_data *map, int x, int y, int color);
-void		draw_iso(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx);
-void		zoom_parallel(t_points *pt, t_mlx *mlx);
 void		check_map_bounds(t_mlx *mx, int *shift_x, int *shift_y, int i);
-void		shift(t_points *pt, t_mlx *mlx);
-void		projection(t_mlx *mx);
+void		draw_iso(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx);
 void		draw(t_img_data *m, t_points a, t_points b, t_mlx *mlx);
 void		ft_draw_line(t_img_data *m, t_points p1, t_points p2, int tmp_e);
-bool		render_frame(t_mlx *mx);
-int			red_cross_mlx(t_mlx *mlx);
-int			key_mlx(int keycode, t_mlx *mlx);
 void		draw_parallel(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx);
+t_points	project_iso(t_points pt, t_mlx *mlx);
 //
 #endif

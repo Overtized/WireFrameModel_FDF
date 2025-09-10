@@ -6,23 +6,11 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/09 21:05:01 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 12:08:15 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-void	ft_put_pixel(t_img_data *map, int x, int y, int color)
-{
-	char	*dst;
-
-	if (x < 0 || x >= X || y < 0 || y >= Y)
-		return ;
-	dst = NULL;
-	if (x >= 0 && x < X && y >= 0 && y < Y)
-		dst = map->addr + (y * map->line_l + x * (map->bit_l / 8));
-	*(unsigned int *)dst = color;
-}
 
 static void	init_dir(t_points p1, t_points p2, int *dir_x, int *dir_y)
 {
@@ -69,7 +57,6 @@ void	draw_iso(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx)
 {
 	int	row;
 	int	col;
-	// t_points proj;
 
 	row = 0;
 	col = 0;
@@ -78,8 +65,6 @@ void	draw_iso(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx)
 		col = 0;
 		while (col < mp->token_per_lines)
 		{
-			// proj = project_iso(p[row][col], mlx);
-			// shift(&proj, mlx);
 			if (col < mp->token_per_lines - 1)
 				draw(m, p[row][col], p[row][col + 1], mlx);
 			if (row < mp->rows -1)
@@ -89,19 +74,17 @@ void	draw_iso(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx)
 		row++;
 	}
 }
+
 void	draw_parallel(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx)
 {
-	int row;
-	int col;
-	// t_points scaled;
+	int	row;
+	int	col;
 
 	row = 0;
 	col = 0;
 	while (row < mp->rows)
 	{
 		col = 0;
-		// scaled = zoom_parallel(p[row][col], mlx);
-		// shift(&scaled, mlx);
 		while (col < mp->token_per_lines)
 		{
 			if (col < mp->token_per_lines - 1)
@@ -113,18 +96,13 @@ void	draw_parallel(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx)
 		row++;
 	}
 }
-void	zoom_parallel(t_points *pt, t_mlx *mlx)
-{
-	pt->x = pt->x * mlx->zoom;
-	pt->y = pt->y * mlx->zoom;
-	pt->z = pt->z * mlx->zoom;
-}
+
 t_points	project_iso(t_points pt, t_mlx *mlx)
 {
-	float	angle;
-	float	xf;
-	float	yf;
-	t_points scaled;
+	float		angle;
+	float		xf;
+	float		yf;
+	t_points	scaled;
 
 	scaled = pt;
 	angle = (30.0 * PI) / 180.0;

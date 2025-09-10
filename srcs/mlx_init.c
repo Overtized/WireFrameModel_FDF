@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/09 20:49:21 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 12:07:50 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 static void	trigger_hooks(t_mlx *mlx)
 {
 	mlx_hook(mlx->window, ON_DESTROY, 0L, red_cross_mlx, mlx);
-	mlx_hook(mlx->window, 2, 1L<<0, key_mlx, mlx);
+	mlx_hook(mlx->window, 2, 1L << 0, key_mlx, mlx);
 }
+
 int	render_loop(t_mlx *mlx)
 {
 	if (mlx->redraw)
@@ -24,8 +25,9 @@ int	render_loop(t_mlx *mlx)
 		render_frame(mlx);
 		mlx->redraw = false;
 	}
-	return(0);
+	return (0);
 }
+
 static void	render_grid(t_mlx *mx)
 {
 	int	i;
@@ -49,7 +51,8 @@ bool	render_frame(t_mlx *mx)
 	mx->img.img = mlx_new_image(mx->mlx_ptr, X, Y);
 	if (!mx->img.img)
 		return (false);
-	mx->img.addr = mlx_get_data_addr(mx->img.img, &mx->img.bit_l, &mx->img.line_l, &mx->img.endian);
+	mx->img.addr = mlx_get_data_addr(mx->img.img,
+			&mx->img.bit_l, &mx->img.line_l, &mx->img.endian);
 	render_grid(mx);
 	mlx_put_image_to_window(mx->mlx_ptr, mx->window, mx->img.img, 0, 0);
 	return (true);
