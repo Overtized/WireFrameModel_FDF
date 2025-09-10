@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 12:32:42 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:46:15 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ bool	render_frame(t_mlx *mx)
 
 bool	mlx_setup(t_mlx	*mlx)
 {
-	mlx->zoom = 20;
+	if (mlx->map_cfg->rows < 100)
+		mlx->zoom = 20;
+	else if (mlx->map_cfg->rows >= 100)
+		mlx->zoom = 1;
 	mlx->redraw = true;
 	mlx->img.img = NULL;
 	mlx->new_offset_x = 0;

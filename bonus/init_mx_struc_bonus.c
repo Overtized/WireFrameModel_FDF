@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:06:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 16:25:51 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:49:55 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 void	init_mx_struct_bonus(t_mlx *mlx)
 {
-	mlx->zoom = 20;
-	mlx->zoom_z = 10;
+	if (mlx->map_cfg->rows < 100)
+		mlx->zoom = 20;
+	else if (mlx->map_cfg->rows >= 100)
+		mlx->zoom = 1;
+	if (mlx->map_cfg->rows < 100)
+		mlx->zoom_z = 10;
+	else if (mlx->map_cfg->rows >= 100)
+		mlx->zoom_z = 0.5;
 	mlx->redraw = true;
 	mlx->img.img = NULL;
 	mlx->new_offset_x = 0;
