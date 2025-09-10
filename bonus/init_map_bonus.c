@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:12:52 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 12:13:04 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 19:02:06 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,31 @@ static int	get_token_number(char *line)
 	return (token);
 }
 
-bool	allocate_map(t_map *map, t_points ***map_point)
+t_points	**allocate_map(t_map *map, t_points **map_point)
 {
 	int	i;
 
 	i = 0;
-	*map_point = malloc(sizeof(t_points *) * map->rows);
-	if (!*map_point)
-		return (false);
+	map_point = malloc(sizeof(t_points *) * map->rows);
+	if (!map_point)
+		return (NULL);
 	while (i < map->rows)
 	{
-		(*map_point)[i] = malloc(sizeof(t_points) * map->token_per_lines);
-		if (!(*map_point)[i])
+		map_point[i] = malloc(sizeof(t_points) * map->token_per_lines);
+		if (!map_point[i])
 		{
 			while (i > 0)
 			{
-				free((*map_point)[i]);
+				
+				free(map_point[i]);
 				i--;
 			}
-			free(*map_point);
-			return (false);
+			free(map_point);
+			return (NULL);
 		}
 		i++;
 	}
-	return (true);
+	return (map_point);
 }
 
 bool	init_map(char *raw_map, t_map *map_config)
@@ -93,7 +94,7 @@ bool	init_map(char *raw_map, t_map *map_config)
 	return (close(fd), true);
 }
 
-static void	load_struct(char **split, t_points **map_param, int i, int toks)
+static void	load_struct(char **split, t_points **map_param, int i)
 {
 	char	*com;
 	int		j;
@@ -101,7 +102,7 @@ static void	load_struct(char **split, t_points **map_param, int i, int toks)
 
 	hex = "0123456789ABCDEF";
 	j = 0;
-	while (j < toks)
+	while (split && split[j])
 	{
 		map_param[i][j].z = 0;
 		map_param[i][j].color = 0xFFFFFF;
@@ -133,7 +134,7 @@ bool	load_map(char *map, t_points **map_param, t_map *map_struct)
 		split = ft_split(lines[i], ' ');
 		if (!split)
 			return (ft_free_double_char(split), false);
-		load_struct(split, map_param, i, map_struct->token_per_lines);
+		load_struct(split, map_param, i);
 		ft_free_double_char(split);
 		i++;
 	}

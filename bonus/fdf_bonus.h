@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 16:12:38 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 18:52:19 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ bool		test_int(char *buffer);
 //
 bool		init_map(char *file, t_map *map_config);
 bool		load_map(char *map, t_points **map_param, t_map *map_struct);
-bool		allocate_map(t_map *gridsize, t_points ***coordonates);
+t_points	**allocate_map(t_map *map, t_points **map_point);
 //
 void		ft_free_map(t_map *map_config);
 void		ft_free_structs(t_map *map_config, t_points **map_coords);
