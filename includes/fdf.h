@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 12:55:43 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 14:23:50 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_draw_line
 	int	dir_x;
 	int	dir_y;
 	int	error;
-	int tmp_e;
+	int	tmp_e;
 }	t_draw_line;
 bool		test_input(char *map, t_map *map_strct);
 bool		test_int(char *buffer);

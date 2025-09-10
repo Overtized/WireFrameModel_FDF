@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 11:41:07 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 13:00:41 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 14:29:01 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static t_mp_bd	*init_bound(t_mp_bd *mp)
 
 void	check_map_bounds(t_mlx *mx, int *shift_x, int *shift_y, int i)
 {
-	int	j;
-	t_mp_bd	mp;
-	t_points p;
+	t_mp_bd		mp;
+	t_points	p;
+	int			j;
 
 	init_bound(&mp);
 	while (i < mx->map_cfg->rows)
@@ -34,13 +34,13 @@ void	check_map_bounds(t_mlx *mx, int *shift_x, int *shift_y, int i)
 		while (j < mx->map_cfg->token_per_lines)
 		{
 			p = mx->map_cds[i][j];
-			if(p.x < mp.min_x)
+			if (p.x < mp.min_x)
 				mp.min_x = p.x;
-			if(p.x > mp.max_x)
+			if (p.x > mp.max_x)
 				mp.max_x = p.x;
-			if(p.y <  mp.min_y)
+			if (p.y < mp.min_y)
 				mp.min_y = p.y;
-			if(p.y > mp.max_y)
+			if (p.y > mp.max_y)
 				mp.max_y = p.y;
 			j++;
 		}
@@ -71,7 +71,7 @@ void	draw(t_img_data *m, t_points first_pt, t_points second_pt, t_mlx *mlx)
 		shift(&first_pt, mlx);
 		second_pt = project_iso(second_pt, mlx);
 		shift(&second_pt, mlx);
-		ft_draw_line(m, first_pt, second_pt);
+		ft_draw_line(m, first_pt, second_pt, mlx);
 	}
 	else if (mlx->proj_type == 0)
 	{
@@ -79,6 +79,6 @@ void	draw(t_img_data *m, t_points first_pt, t_points second_pt, t_mlx *mlx)
 		shift(&first_pt, mlx);
 		zoom_parallel(&second_pt, mlx);
 		shift(&second_pt, mlx);
-		ft_draw_line(m, first_pt, second_pt);
+		ft_draw_line(m, first_pt, second_pt, mlx);
 	}
 }

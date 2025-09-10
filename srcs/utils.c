@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 13:02:56 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 14:22:26 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_dir(t_points p1, t_points p2, int *dir_x, int *dir_y)
 
 void	ft_draw_line(t_img_data *m, t_points p1, t_points p2)
 {
-	t_draw_line l;
+	t_draw_line	l;
 
 	l.dx = ft_abs(p2.x - p1.x);
 	l.dy = ft_abs(p2.y - p1.y);
@@ -43,7 +43,7 @@ void	ft_draw_line(t_img_data *m, t_points p1, t_points p2)
 		}
 		if (l.tmp_e < l.dx)
 		{
-			p1.y += l.dir_y;	
+			p1.y += l.dir_y;
 			l.error += l.dx;
 		}
 	}

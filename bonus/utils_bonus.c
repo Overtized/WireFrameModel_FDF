@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 13:02:44 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 14:27:03 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ static void	init_dir(t_points p1, t_points p2, int *dir_x, int *dir_y)
 		*dir_y = -1;
 }
 
-void	ft_draw_line(t_img_data *m, t_points p1, t_points p2)
+void	ft_draw_line(t_img_data *m, t_points p1, t_points p2, t_mlx *mlx)
 {
-	t_draw_line l;
+	t_draw_line	l;
 
+	if (mlx->color_flag == 1)
+		invert_color(&p1.color, &p2.color);
 	l.dx = ft_abs(p2.x - p1.x);
 	l.dy = ft_abs(p2.y - p1.y);
 	init_dir(p1, p2, &l.dir_x, &l.dir_y);
@@ -43,7 +45,7 @@ void	ft_draw_line(t_img_data *m, t_points p1, t_points p2)
 		}
 		if (l.tmp_e < l.dx)
 		{
-			p1.y += l.dir_y;	
+			p1.y += l.dir_y;
 			l.error += l.dx;
 		}
 	}
