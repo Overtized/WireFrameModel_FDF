@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 14:29:21 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:12:38 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ typedef struct s_mlx
 	int			new_offset_y;
 	int			proj_type;
 	int			color_flag;
+	int			rot_x;
+	int			rot_y;
+	int			rot_z;
 	float		zoom;
+	float		zoom_z;
 	bool		redraw;
 }				t_mlx;
 typedef struct s_mp_bd
@@ -94,6 +98,9 @@ bool		mlx_setup( t_mlx	*mlx);
 int			key_mlx(int key, t_mlx *mlx);
 int			red_cross_mlx(t_mlx *mlx);
 void		invert_color(int *color1, int *color2);
+void		rotate_x(t_points *pt, t_mlx *mlx);
+void		rotate_y(t_points *pt, t_mlx *mlx);
+void		rotate_z(t_points *pt, t_mlx *mlx);
 void		ft_put_pixel(t_img_data *map, int x, int y, int color);
 void		check_map_bounds(t_mlx *mx, int *shift_x, int *shift_y, int i);
 void		draw_iso(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx);
@@ -101,5 +108,6 @@ void		draw(t_img_data *m, t_points a, t_points b, t_mlx *mlx);
 void		ft_draw_line(t_img_data *m, t_points p1, t_points p2, t_mlx *mlx);
 void		draw_parallel(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx);
 t_points	project_iso(t_points pt, t_mlx *mlx);
+void		init_mx_struct_bonus(t_mlx *mlx);
 //
 #endif

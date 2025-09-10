@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:14:14 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 14:28:22 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:30:34 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,41 @@ void	ft_put_pixel(t_img_data *map, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	red_cross_mlx(t_mlx *mlx)
+void	rotate_x(t_points *pt, t_mlx *mlx)
 {
-	mlx_loop_end(mlx->mlx_ptr);
-	return (0);
+	float	y;
+	float	z;
+	float	radian;
+
+	radian = (mlx->rot_x * PI) / 180.0;
+	y = pt->y;
+	z = pt->z;
+	pt->y = y * cos(radian) - z * sin(radian);
+	pt->z = y * sin(radian) + z * cos(radian);
+}
+
+void	rotate_y(t_points *pt, t_mlx *mlx)
+{
+	float	x;
+	float	z;
+	float	radian;
+
+	radian = (mlx->rot_y * PI) / 180.0;
+	x = pt->x;
+	z = pt->z;
+	pt->x = x * cos(radian) + z * sin(radian);
+	pt->z = -x * sin(radian) + z * cos(radian);
+}
+
+void	rotate_z(t_points *pt, t_mlx *mlx)
+{
+	float	x;
+	float	y;
+	float	radian;
+
+	radian = (mlx->rot_z * PI) / 180.0;
+	x = pt->x;
+	y = pt->y;
+	pt->x = x * cos(radian) - y * sin(radian);
+	pt->y = x * sin(radian) + y * cos(radian);
 }

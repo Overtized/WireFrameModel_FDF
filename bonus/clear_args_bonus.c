@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:20:01 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 12:12:53 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:02:10 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,10 @@ void	ft_free_structs(t_map *map_config, t_points **map_coords)
 		ft_free_args(map_config, map_coords);
 	}
 	ft_free_map(map_config);
+}
+
+int	red_cross_mlx(t_mlx *mlx)
+{
+	mlx_loop_end(mlx->mlx_ptr);
+	return (0);
 }

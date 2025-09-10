@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 14:24:51 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:29:18 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,7 @@ static int	render_loop(t_mlx *mlx)
 
 bool	mlx_setup(t_mlx	*mlx)
 {
-	mlx->zoom = 20;
-	mlx->redraw = true;
-	mlx->img.img = NULL;
-	mlx->new_offset_x = 0;
-	mlx->color_flag = 0;
-	mlx->new_offset_y = 0;
-	mlx->proj_type = 1;
+	init_mx_struct_bonus(mlx);
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
 		return (false);

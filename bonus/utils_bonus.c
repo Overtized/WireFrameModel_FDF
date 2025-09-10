@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 14:27:03 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:29:28 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_points	project_iso(t_points pt, t_mlx *mlx)
 	angle = (30.0 * PI) / 180.0;
 	scaled.x = pt.x * mlx->zoom;
 	scaled.y = pt.y * mlx->zoom;
-	scaled.z = pt.z * (mlx->zoom / 2);
+	scaled.z = pt.z * (mlx->zoom_z / 2);
 	xf = (float)(scaled.x - scaled.y) *cosf(angle);
 	yf = (float)(scaled.x + scaled.y) *sinf(angle) - (float)scaled.z;
 	scaled.x = (int) xf;
