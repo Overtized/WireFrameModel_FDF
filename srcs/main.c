@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:21:44 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 18:49:49 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 21:52:16 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int	main(int ac, char *av[])
 {
 	t_map		*map;
 	t_points	**map_pt;
-	t_mlx		mlx;
+	t_mlx		*mlx;
 
+	mlx = ft_calloc(1, sizeof(t_mlx));
 	map_pt = NULL;
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
@@ -31,10 +32,10 @@ int	main(int ac, char *av[])
 		return (ft_free_structs(map, map_pt), 1);
 	if (!load_map(map->map, map_pt, map))
 		return (ft_printf(1, "parsing error \n"), 1);
-	mlx.map_cds = map_pt;
-	mlx.map_cfg = map;
-	if (!mlx_setup(&mlx))
-		return (ft_free_structs(map, map_pt), 1);
+	mlx->map_cds = map_pt;
+	mlx->map_cfg = map;
+	if (!mlx_setup(mlx))
+		return (ft_free_structs(map, map_pt),free(mlx), 1);
 	ft_free_structs(map, map_pt);
 	return (0);
 }
