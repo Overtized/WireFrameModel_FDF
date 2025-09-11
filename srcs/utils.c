@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 14:22:26 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 12:11:39 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_points	project_iso(t_points pt, t_mlx *mlx)
 	angle = (30.0 * PI) / 180.0;
 	scaled.x = pt.x * mlx->zoom;
 	scaled.y = pt.y * mlx->zoom;
-	scaled.z = pt.z * mlx->zoom;
+	scaled.z = pt.z * (mlx->zoom / 4);
 	xf = (float)(scaled.x - scaled.y) *cosf(angle);
 	yf = (float)(scaled.x + scaled.y) *sinf(angle) - (float)scaled.z;
 	scaled.x = (int) xf;

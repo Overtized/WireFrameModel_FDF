@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 11:27:57 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 12:10:28 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	render_grid(t_mlx *mx)
 	mx->offset_x = shift_x;
 	mx->offset_y = shift_y;
 	if (mx->proj_type == 0)
-		draw_parallel(&mx->img, mx->map_cds, mx->map_cfg, mx);
+		draw_iso(&mx->img, mx->map_cds, mx->map_cfg, mx);
 }
 
 bool	render_frame(t_mlx *mx)
