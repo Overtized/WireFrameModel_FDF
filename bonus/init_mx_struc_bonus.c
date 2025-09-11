@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mx_struc_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:06:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 18:38:24 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 12:43:34 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,13 @@ void	init_mx_struct_bonus(t_mlx *mlx)
 	mlx->rot_x = 0;
 	mlx->rot_y = 0;
 	mlx->rot_z = 0;
+}
+void	handle_z_zoom(t_mlx *mlx, double factor)
+{
+	mlx->zoom_z *= factor;
+	if (mlx->zoom_z < 0)
+		mlx->zoom_z = 0;
+	else if (mlx->zoom_z > 25)
+		mlx->zoom_z = 25;
+	mlx->redraw = true;
 }

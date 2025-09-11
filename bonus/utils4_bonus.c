@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:43:03 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 11:33:16 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 12:37:47 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static int	key_mlx2(int key, t_mlx *mlx)
 		else if (key == 0x6b)
 			mlx->color_flag = 0;
 		else if (key == 0x74)
-			mlx->zoom_z *= 1.1;
+			handle_z_zoom(mlx, 1.1);
 		else if (key == 0x67)
-			mlx->zoom_z *= 0.9;
+			handle_z_zoom(mlx, 0.9);
 		mlx->redraw = true;
 	} // i k t g
 	if (key == 0x78 || key == 0x73 || key == 0x7a )

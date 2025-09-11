@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 18:52:19 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 12:36:31 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ bool		mlx_setup( t_mlx	*mlx);
 int			key_mlx(int key, t_mlx *mlx);
 int			red_cross_mlx(t_mlx *mlx);
 void		invert_color(int *color1, int *color2);
+void		handle_z_zoom(t_mlx *mlx, double factor);
 void		rotate_x(t_points *pt, t_mlx *mlx);
 void		rotate_y(t_points *pt, t_mlx *mlx);
 void		rotate_z(t_points *pt, t_mlx *mlx);
