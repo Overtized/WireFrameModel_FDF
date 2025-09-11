@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_errors_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:10:04 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 12:13:01 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 10:55:46 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ bool	test_int(char *buffer)
 	while (splt[i])
 	{
 		com = ft_split(splt[i], ',');
-		if (!com)
-			return (ft_free_double_char(com), ft_free_double_char(splt), false);
-		if (ft_is_overflow(com[0]))
-			return (ft_free_double_char(com), ft_free_double_char(splt), false);
+		if (!com || ft_is_overflow(com[0]))
+		{
+			ft_free_double_char(com);
+			ft_free_double_char(splt);
+			return (false);
+		}
 		ft_free_double_char(com);
 		i++;
 	}

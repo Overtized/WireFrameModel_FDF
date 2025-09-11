@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 16:29:18 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 11:27:51 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	render_grid(t_mlx *mx)
 
 static bool	render_frame(t_mlx *mx)
 {
+	int	ret_v;
+
 	if (mx->img.img)
 		mlx_destroy_image(mx->mlx_ptr, mx->img.img);
 	mx->img.img = mlx_new_image(mx->mlx_ptr, X, Y);
@@ -43,16 +45,24 @@ static bool	render_frame(t_mlx *mx)
 		return (false);
 	mx->img.addr = mlx_get_data_addr(mx->img.img,
 			&mx->img.bit_l, &mx->img.line_l, &mx->img.endian);
+	if (mx->img.addr == NULL)
+		return (false);
 	render_grid(mx);
-	mlx_put_image_to_window(mx->mlx_ptr, mx->window, mx->img.img, 0, 0);
+	ret_v = mlx_put_image_to_window(mx->mlx_ptr, mx->window, mx->img.img, 0, 0);
+	if (ret_v == -1)
+		return (false);
 	return (true);
 }
 
-static int	render_loop(t_mlx *mlx)
+int	render_loop(t_mlx *mlx)
 {
 	if (mlx->redraw)
 	{
-		render_frame(mlx);
+		if (!render_frame(mlx))
+		{
+			mlx_loop_end(mlx->mlx_ptr);
+			return (1);
+		}
 		mlx->redraw = false;
 	}
 	return (0);

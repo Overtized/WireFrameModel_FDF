@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:43:03 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 16:22:16 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 11:33:16 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	handle_zoom(t_mlx *mlx, double factor)
 
 static void	handle_shift(t_mlx *mlx, int x, int y)
 {
-		mlx->new_offset_x += x;
-		mlx->new_offset_y += y;
-		mlx->redraw = true;
+	mlx->new_offset_x += x;
+	mlx->new_offset_y += y;
+	mlx->redraw = true;
 }
 
 static int	key_mlx2(int key, t_mlx *mlx)

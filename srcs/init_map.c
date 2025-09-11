@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:12:52 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 19:02:47 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 11:06:27 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	get_token_number(char *line)
 	int		token;
 	size_t	len;
 	char	**split;
-	char	*com;
 
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
@@ -30,10 +29,7 @@ static int	get_token_number(char *line)
 		return (ft_free_double_char(split), -1);
 	while (split[i])
 	{
-		com = strchr(split[i], ',');
-		if (com)
-			*com = '\0';
-		token ++;
+		token++;
 		i++;
 	}
 	ft_free_double_char(split);
@@ -55,7 +51,6 @@ t_points	**allocate_map(t_map *map, t_points **map_point)
 		{
 			while (i > 0)
 			{
-				
 				free(map_point[i]);
 				i--;
 			}
@@ -108,8 +103,8 @@ static void	load_struct(char **split, t_points **map_param, int i)
 		map_param[i][j].color = 0xFFFFFF;
 		if (split[j])
 		{
-			com = ft_strchr(split[j], ',');
 			map_param[i][j].z = ft_atoi(split[j]);
+			com = ft_strchr(split[j], ',');
 			if (com)
 				map_param[i][j].color = ft_atoi_base(str_toupper(com + 3), hex);
 		}

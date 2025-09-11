@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 18:50:10 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 11:32:27 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ enum
 	X = 1000,
 	Y = 1000,
 };
-typedef struct s_img_data {
+typedef struct s_img_data
+{
 	void	*img;
 	char	*addr;
 	int		bit_l;

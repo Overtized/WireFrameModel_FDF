@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:34:23 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/05 15:14:40 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 11:32:08 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,13 @@ static bool	test_map(char *map, t_map *map_strct)
 		return (perror("open fail \n"), false);
 	buffer = read_map(fd);
 	if (!buffer)
-		return (free(buffer), false);
+		return (free(buffer), close(fd), false);
 	map_strct->map = ft_strdup(buffer);
 	free(buffer);
 	if (!test_map_validity(map_strct->map))
-		return (false);
+		return (close(fd), false);
 	if (!test_int(map_strct->map))
-		return (false);
+		return (close(fd), false);
 	return (close(fd), true);
 }
 
