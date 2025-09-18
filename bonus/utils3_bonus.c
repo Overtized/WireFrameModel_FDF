@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 11:41:07 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 15:30:26 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/18 11:37:03 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,7 @@ static void	zoom_parallel(t_points *pt, t_mlx *mlx)
 
 void	draw(t_img_data *m, t_points first_pt, t_points second_pt, t_mlx *mlx)
 {
-	rotate_x(&first_pt, mlx);
-	rotate_y(&first_pt, mlx);
-	rotate_z(&first_pt, mlx);
-	rotate_x(&second_pt, mlx);
-	rotate_y(&second_pt, mlx);
-	rotate_z(&second_pt, mlx);
+	
 	if (mlx->proj_type == 1)
 	{
 		first_pt = project_iso(first_pt, mlx);
@@ -81,6 +76,12 @@ void	draw(t_img_data *m, t_points first_pt, t_points second_pt, t_mlx *mlx)
 		zoom_parallel(&first_pt, mlx);
 		zoom_parallel(&second_pt, mlx);
 	}
+	rotate_x(&first_pt, mlx);
+	rotate_y(&first_pt, mlx);
+	rotate_z(&first_pt, mlx);
+	rotate_x(&second_pt, mlx);
+	rotate_y(&second_pt, mlx);
+	rotate_z(&second_pt, mlx);
 	shift(&first_pt, mlx);
 	shift(&second_pt, mlx);
 	ft_draw_line(m, first_pt, second_pt, mlx);

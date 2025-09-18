@@ -15,6 +15,7 @@
 # **************************************************************************** #
 
 NAME = fdf
+NAME_BONUS = fdf_bonus
 
 # **************************************************************************** #
 #                                Compiler + Flags                              #
@@ -80,6 +81,12 @@ $(NAME): $(Objects) $(SHARED_OBJ)
 	@make -C $(SHARED_DIR)
 	$(CC) $(FLAGS) $(INCLUDES) $(Objects) $(SHARED_OBJ) $(LIBFT) $(MLX_FLAG) -o $(NAME)
 
+$(NAME_BONUS) : $(BONUS_OBJ) $(SHARED_OBJ)
+	@make -C $(LIBFT_DIR)
+	@make -C $(SHARED_DIR)
+	$(CC) $(FLAGS) $(INCLUDES_BONUS) $(BONUS_OBJ) $(SHARED_OBJ) $(LIBFT) $(MLX_FLAG) -o $(NAME_BONUS)
+
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@ 
@@ -93,10 +100,7 @@ $(OBJ_DIR)/%.o: $(SHARED_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
-bonus: $(BONUS_OBJ) $(SHARED_OBJ)
-	@make -C $(LIBFT_DIR)
-	@make -C $(SHARED_DIR)
-	$(CC) $(FLAGS) $(INCLUDES_BONUS) $(BONUS_OBJ) $(SHARED_OBJ) $(LIBFT) $(MLX_FLAG) -o $(NAME)_bonus
+bonus: $(NAME_BONUS)
 
 # **************************************************************************** #
 #                                CLEAN & RE                                    #
