@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 12:36:31 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:38:26 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,21 @@
 # include "../Libft/My_libft.h"
 # include "../minilibx-linux/mlx.h"
 # include <math.h>
+
+# define ESCAPE 0xff1b
+# define PLUS_SIGN 0x3d
+# define MINUS_SIGN 0x2d
+# define LEFT 0xff52
+# define RIGHT 0xff54
+# define DOWN 0xff53
+# define UP 0xff51
+# define P_KEY 0x70
+# define I_KEY 0x69
+# define T_KEY 0x74
+# define G_KEY 0x67
+# define X_KEY 0x78
+# define S_KEY 0x73
+# define Z_KEY 0x7a
 
 enum
 {
@@ -90,8 +105,8 @@ bool		init_map(char *file, t_map *map_config);
 bool		load_map(char *map, t_points **map_param, t_map *map_struct);
 t_points	**allocate_map(t_map *map, t_points **map_point);
 //
-void		ft_free_map(t_map *map_config);
-void		ft_free_structs(t_map *map_config, t_points **map_coords);
+void		ft_free_map(t_map *map_config, t_mlx *mlx);
+void		ft_free_structs(t_map *map_cfg, t_points **map_coords, t_mlx *mlx);
 bool		handle_errors(int ac, char *av, t_map *map);
 //
 bool		mlx_setup( t_mlx	*mlx);

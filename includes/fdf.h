@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:31:13 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 11:32:27 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:39:11 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include "../Libft/My_libft.h"
 # include "../minilibx-linux/mlx.h"
 # include <math.h>
+
+# define ESCAPE 0xff1b
 
 enum
 {
@@ -86,8 +88,8 @@ bool		init_map(char *file, t_map *map_config);
 bool		load_map(char *map, t_points **map_param, t_map *map_struct);
 t_points	**allocate_map(t_map *gridsize, t_points **coordonates);
 //
-void		ft_free_map(t_map *map_config);
-void		ft_free_structs(t_map *map_config, t_points **map_coords);
+void		ft_free_map(t_map *map_config, t_mlx *mlx);
+void		ft_free_structs(t_map *map_cfg, t_points **map_coords, t_mlx *mlx);
 bool		handle_errors(int ac, char *av, t_map *map);
 //
 bool		mlx_setup( t_mlx	*mlx);

@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:14:14 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/10 12:35:31 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:39:30 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	red_cross_mlx(t_mlx *mlx)
 
 int	key_mlx(int keycode, t_mlx *mlx)
 {
-	if (keycode == 0xff1b)
+	if (keycode == ESCAPE)
 		mlx_loop_end(mlx->mlx_ptr);
 	return (0);
 }

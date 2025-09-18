@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:43:03 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 12:37:47 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:47:49 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,55 +31,50 @@ static void	handle_shift(t_mlx *mlx, int x, int y)
 
 static int	key_mlx2(int key, t_mlx *mlx)
 {
-	if (key == 0x69 || key == 0x6b || key == 0x74 || key == 0x67)
+	if (key == I_KEY || key == T_KEY || key == G_KEY)
 	{
-		if (key == 0x69)
-			mlx->color_flag = 1;
-		else if (key == 0x6b)
-			mlx->color_flag = 0;
-		else if (key == 0x74)
+		if (key == I_KEY)
+			mlx->color_flag = !mlx->color_flag;
+		else if (key == T_KEY)
 			handle_z_zoom(mlx, 1.1);
-		else if (key == 0x67)
+		else if (key == G_KEY)
 			handle_z_zoom(mlx, 0.9);
 		mlx->redraw = true;
-	} // i k t g
-	if (key == 0x78 || key == 0x73 || key == 0x7a )
+	}
+	if (key == X_KEY || key == S_KEY || key == Z_KEY)
 	{
-		if (key == 0x78)
+		if (key == X_KEY)
 			mlx->rot_x += 10;
-		else if (key == 0x73)
+		else if (key == S_KEY)
 			mlx->rot_y += 10;
-		else if ( key == 0x7a)
+		else if (key == Z_KEY)
 			mlx->rot_z += 10;
 		mlx->redraw = true;
-	} // x y z
+	}
 	return (0);
 }
 
 static int	key_mlx1(int keycode, t_mlx *mlx)
 {
-	if (keycode == 0xff1b) // escape
+	if (keycode == ESCAPE)
 		mlx_loop_end(mlx->mlx_ptr);
-	if (keycode == 0x3d)
-		handle_zoom(mlx, 1.1); // zoom +
-	if (keycode == 0x2d)
-		handle_zoom(mlx, 0.9); // zoom -
-	if (keycode == 0xff52) // up
+	if (keycode == PLUS_SIGN)
+		handle_zoom(mlx, 1.1);
+	if (keycode == MINUS_SIGN)
+		handle_zoom(mlx, 0.9);
+	if (keycode == LEFT)
 		handle_shift(mlx, 0, -10);
-	if (keycode == 0xff54) // down
-		handle_shift(mlx, 0, +10);
-	if (keycode == 0xff53) // right
+	if (keycode == RIGHT)
+		handle_shift(mlx, 0, 10);
+	if (keycode == DOWN)
 		handle_shift(mlx, 10, 0);
-	if (keycode == 0xff51) // left
+	if (keycode == UP)
 		handle_shift(mlx, -10, 0);
-	if (keycode == 0x70 || keycode == 0x6c)
+	if (keycode == P_KEY)
 	{
-		if (keycode == 0x70)
-			mlx->proj_type = 0;
-		else if (keycode == 0x6c)
-			mlx->proj_type = 1;
+		mlx->proj_type = !mlx->proj_type;
 		mlx->redraw = true;
-	} // p l
+	}
 	return (0);
 }
 
