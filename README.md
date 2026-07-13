@@ -2,7 +2,7 @@
 
 # **Program Name** : ['WireFrameModel_FDF']
 
-![fdf2](fdf2.png)
+![fdf1](fdf1.png)
 ![fdf22](fdf22.png)
 
 ### **Short Description** : 
@@ -93,5 +93,4 @@ The program takes an .fdf file as an argument, which contains a grid of numbers 
 [Website : 3D rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions)  
 [Website : Bresengam's Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) 
 
-![fdf1](fdf1.png)
 
