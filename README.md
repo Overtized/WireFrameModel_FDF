@@ -2,6 +2,10 @@
 
 # **Program Name** : ['WireFrameModel_FDF']
 
+![fdf1](fdf1.png)
+![fdf2](fdf2.png)
+![fdf22](fdf22.png)
+
 ### **Short Description** : 
 > This project introduces the fundamentals of 3D computer graphics, matrix transformations, and line rendering in C by rendering a 3D wireframe (Fil de Fer) model of a landscape from a topographical map.  
 
