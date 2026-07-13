@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:35:55 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 21:40:01 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:17:36 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	trigger_hooks(t_mlx *mlx)
 {
-	mlx_hook(mlx->window, ON_DESTROY, 0L, red_cross_mlx, mlx);
-	mlx_hook(mlx->window, 2, 1L << 0, key_mlx, mlx);
+	mlx_hook(mlx->window, ON_DESTROY, 0L, (void *)red_cross_mlx, mlx);
+	mlx_hook(mlx->window, 2, 1L << 0, (void *)key_mlx, mlx);
 }
 
 int	render_loop(t_mlx *mlx)
@@ -64,7 +64,7 @@ bool	render_frame(t_mlx *mx)
 	if (ret_v == -1)
 		return (false);
 	return (true);
-}
+}	
 
 bool	mlx_setup(t_mlx	*mlx)
 {
@@ -83,7 +83,7 @@ bool	mlx_setup(t_mlx	*mlx)
 	mlx->window = mlx_new_window(mlx->mlx_ptr, X, Y, "Fdf");
 	if (!mlx->window)
 		return (free(mlx->mlx_ptr), false);
-	mlx_loop_hook(mlx->mlx_ptr, render_loop, mlx);
+	mlx_loop_hook(mlx->mlx_ptr, (void *)render_loop, mlx);
 	trigger_hooks(mlx);
 	mlx_loop(mlx->mlx_ptr);
 	if (mlx->img.img)
