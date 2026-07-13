@@ -2,7 +2,6 @@
 
 # **Program Name** : ['WireFrameModel_FDF']
 
-![fdf1](fdf1.png)
 ![fdf2](fdf2.png)
 ![fdf22](fdf22.png)
 
@@ -92,4 +91,7 @@ The program takes an .fdf file as an argument, which contains a grid of numbers 
 [Website : MiniLibx tutorial](https://harm-smits.github.io/42docs/libs/minilibx)  
 [Website : Isometric Projection](https://en.wikipedia.org/wiki/Isometric_projection)  
 [Website : 3D rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions)  
-[Website : Bresengam's Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)  
+[Website : Bresengam's Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) 
+
+![fdf1](fdf1.png)
+
