@@ -40,8 +40,6 @@ You will interact with fundamental computer graphic concepts such as:
 
 Apart from the use of MiniLibX to push images to the screen, this project revolves around parsing a topographical map of heights (.fdf files) into a 2D array, computing the 3D space transformations (scaling, translating, rotating), and ultimately projecting it onto a 2D screen using an isometric perspective.
 
-Apart from the use of socket(), in order to make our network a bit more realistic we had to make the transmission phase (read and write part), be non-blocking, hence making the server capable of handling multiples users simultaneously. We chose poll() for that mission for its simplicity and shared similarity with epoll.
-
 - The aim of the project is to go over:
 
 [How to build a 3D graphic renderer natively in C:]  
@@ -56,8 +54,8 @@ This project emphasizes the understanding of:
 - The foundations of modern 3D rendering pipelines and geometric mathematics.
 
 ### **Project Summary** :
-The program takes an .fdf file as an argument, which contains a grid of numbers where each number represents a point's altitude ($z$-axis). It parses this data and renders the landscape as a 3D wireframe mesh in an isometric view. Using customized scaling and rotation formulas, it accurately links these vertices together smoothly within an interactive graphical window.  
 
+The program takes an .fdf file as an argument, which contains a grid of numbers where each number represents a point's altitude (z-axis). It parses this data and renders the landscape as a 3D wireframe mesh in an isometric view. Using customized scaling and rotation formulas, it accurately links these vertices together smoothly within an interactive graphical window.  
 
 ### **Project Features** :
 
