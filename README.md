@@ -33,7 +33,7 @@ FdF (short for Fil de Fer, which translates to wireframe model) is the first gra
 
 At its core, drawing on a screen means calculating and placing pixels. Since modern operating systems handle window management, we use the 42 graphical library MiniLibX to open a window and push pixels to it. To draw a full 3D representation from scratch, you have to bridge the gap between abstract coordinate data and actual visual lines using mathematical algorithms.
 
-You will interact with fundamental computer graphic concepts such as:  
+i interacted with with fundamental computer graphic concepts such as:  
 - Isometric Projection
 - Matrices
 - Bresenham's Line Algorithm
