@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 14:16:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 12:11:39 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:00:24 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	init_dir(t_points p1, t_points p2, int *dir_x, int *dir_y)
 		*dir_y = -1;
 }
 
-void	ft_draw_line(t_img_data *m, t_points p1, t_points p2)
+void	ft_draw_line(t_img_data *m, t_points p1, t_points p2) // bresenham's algorithm
 {
 	t_draw_line	l;
 
@@ -34,7 +34,7 @@ void	ft_draw_line(t_img_data *m, t_points p1, t_points p2)
 	l.error = l.dx - l.dy;
 	while (p1.x != p2.x || p1.y != p2.y)
 	{
-		ft_put_pixel(m, p1.x, p1.y, p1.color);
+		ft_put_pixel(m, p1.x, p1.y, p1.color); // standard putpixel
 		l.tmp_e = l.error * 2;
 		if (l.tmp_e > -l.dy)
 		{
@@ -47,7 +47,7 @@ void	ft_draw_line(t_img_data *m, t_points p1, t_points p2)
 			l.error += l.dx;
 		}
 	}
-	ft_put_pixel(m, p2.x, p2.y, p2.color);
+	ft_put_pixel(m, p2.x, p2.y, p2.color); // standard putpixel
 }
 
 void	draw_iso(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx)
@@ -63,9 +63,9 @@ void	draw_iso(t_img_data *m, t_points **p, t_map *mp, t_mlx *mlx)
 		while (col < mp->token_per_lines)
 		{
 			if (col < mp->token_per_lines - 1)
-				draw(m, p[row][col], p[row][col + 1], mlx);
+				draw(m, p[row][col], p[row][col + 1], mlx); // draw the point at location
 			if (row < mp->rows -1)
-				draw(m, p[row][col], p[row + 1][col], mlx);
+				draw(m, p[row][col], p[row + 1][col], mlx); // draw the point at location
 			col++;
 		}
 		row++;
@@ -102,11 +102,11 @@ t_points	project_iso(t_points pt, t_mlx *mlx)
 	t_points	scaled;
 
 	scaled = pt;
-	angle = (30.0 * PI) / 180.0;
-	scaled.x = pt.x * mlx->zoom;
+	angle = (30.0 * PI) / 180.0; // iso is like dofus view a bended angle 
+	scaled.x = pt.x * mlx->zoom; // apply scaling to the point
 	scaled.y = pt.y * mlx->zoom;
 	scaled.z = pt.z * (mlx->zoom / 4);
-	xf = (float)(scaled.x - scaled.y) *cosf(angle);
+	xf = (float)(scaled.x - scaled.y) *cosf(angle); // compute over float not to loose precision
 	yf = (float)(scaled.x + scaled.y) *sinf(angle) - (float)scaled.z;
 	scaled.x = (int) xf;
 	scaled.y = (int) yf;

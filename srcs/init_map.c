@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:12:52 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 11:06:27 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 04:49:19 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_points	**allocate_map(t_map *map, t_points **map_point)
 		map_point[i] = malloc(sizeof(t_points) * map->token_per_lines);
 		if (!map_point[i])
 		{
-			while (i > 0)
+			while (i > 0) // safe deallocation
 			{
 				free(map_point[i]);
 				i--;
@@ -104,12 +104,12 @@ static void	load_struct(char **split, t_points **map_param, int i)
 		if (split[j])
 		{
 			map_param[i][j].z = ft_atoi(split[j]);
-			com = ft_strchr(split[j], ',');
+			com = ft_strchr(split[j], ','); // if there is a hex
 			if (com)
 				map_param[i][j].color = ft_atoi_base(str_toupper(com + 3), hex);
 		}
-		map_param[i][j].x = j;
-		map_param[i][j].y = i;
+		map_param[i][j].x = j; // load vertices parameters
+		map_param[i][j].y = i; // load vertices parameters
 		j++;
 	}
 }
@@ -124,12 +124,12 @@ bool	load_map(char *map, t_points **map_param, t_map *map_struct)
 	lines = ft_split(map, '\n');
 	if (!lines)
 		return (ft_free_double_char(lines), false);
-	while (i < map_struct->rows)
+	while (i < map_struct->rows) // fill the struct by looping row by row over the map
 	{
 		split = ft_split(lines[i], ' ');
 		if (!split)
 			return (ft_free_double_char(split), false);
-		load_struct(split, map_param, i);
+		load_struct(split, map_param, i); // here
 		ft_free_double_char(split);
 		i++;
 	}

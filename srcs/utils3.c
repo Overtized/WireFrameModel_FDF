@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 11:41:07 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 12:11:10 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:01:59 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	check_map_bounds(t_mlx *mx, int *shift_x, int *shift_y, int i)
 		j = 0;
 		while (j < mx->map_cfg->token_per_lines)
 		{
-			p = mx->map_cds[i][j];
+			p = mx->map_cds[i][j]; // assign a point value for each map point coordinate
 			if (p.x < mp.min_x)
-				mp.min_x = p.x;
+				mp.min_x = p.x; // updates the mins and max values
 			if (p.x > mp.max_x)
 				mp.max_x = p.x;
 			if (p.y < mp.min_y)
@@ -46,8 +46,8 @@ void	check_map_bounds(t_mlx *mx, int *shift_x, int *shift_y, int i)
 		}
 		i++;
 	}
-	*shift_x = (X - (mp.max_x - mp.min_x)) / 2 - mp.min_x;
-	*shift_y = (Y - (mp.max_y - mp.min_y)) / 2 - mp.min_y;
+	*shift_x = (X - (mp.max_x - mp.min_x)) / 2 - mp.min_x; // init of the shift offset value based on map param
+	*shift_y = (Y - (mp.max_y - mp.min_y)) / 2 - mp.min_y; // init of the shift offset value based on map param
 }
 
 static void	shift(t_points *pt, t_mlx *mlx)
@@ -67,16 +67,16 @@ void	draw(t_img_data *m, t_points first_pt, t_points second_pt, t_mlx *mlx)
 {
 	if (mlx->proj_type == 0)
 	{
-		first_pt = project_iso(first_pt, mlx);
-		shift(&first_pt, mlx);
+		first_pt = project_iso(first_pt, mlx); // apply transformations to the point
+		shift(&first_pt, mlx); // replace the point after transform with offset
 		second_pt = project_iso(second_pt, mlx);
 		shift(&second_pt, mlx);
-		ft_draw_line(m, first_pt, second_pt);
+		ft_draw_line(m, first_pt, second_pt); // draw a line between thoses points
 	}
-	else if (mlx->proj_type == 1)
+	else if (mlx->proj_type == 1) // can be changed with the push of a button and a hook
 	{
-		zoom_parallel(&first_pt, mlx);
-		shift(&first_pt, mlx);
+		zoom_parallel(&first_pt, mlx); // apply transformations to the point
+		shift(&first_pt, mlx); // replace the point after transform with offset
 		zoom_parallel(&second_pt, mlx);
 		shift(&second_pt, mlx);
 		ft_draw_line(m, first_pt, second_pt);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:14:14 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/18 13:39:30 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:00:41 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_put_pixel(t_img_data *map, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x >= X || y < 0 || y >= Y)
+	if (x < 0 || x >= X || y < 0 || y >= Y) // safety bound checking
 		return ;
 	dst = NULL;
 	if (x >= 0 && x < X && y >= 0 && y < Y)

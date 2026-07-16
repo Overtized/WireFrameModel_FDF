@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:34:23 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 11:32:08 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 04:45:04 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ static char	*read_map(int fd)
 	char	*line;
 	char	*join;
 
-	buffer = ft_strdup("");
+	buffer = ft_strdup(""); // init empty buffer
 	if (!buffer)
 		return (NULL);
 	line = get_next_line(fd);
 	if (!line)
 		return (free(buffer), NULL);
-	while (line)
+	while (line) // filling of the buffer string
 	{
-		join = ft_strjoin(buffer, line);
+		join = ft_strjoin(buffer, line); // storage
 		if (!join)
 			return (NULL);
 		free(line);
@@ -78,15 +78,15 @@ static bool	test_map_validity(char *buf)
 	{
 		if (!ft_isdigit_space(buf[i]) && !ft_ishex(buf[i]))
 			return (false);
-		if ((buf[i] >= 65 && buf[i] <= 70) || (buf[i] >= 97 && buf[i] <= 102))
+		if ((buf[i] >= 65 && buf[i] <= 70) || (buf[i] >= 97 && buf[i] <= 102)) // screen for hex char presence
 			hex_char = 1;
-		if (buf[i] == '0' && buf[i + 1] == 'x')
+		if (buf[i] == '0' && buf[i + 1] == 'x') // screen for hex combination
 			hex_flag = 1;
 		i++;
 	}
-	if (hex_flag == 1 && !check_hex_comb(buf))
+	if (hex_flag == 1 && !check_hex_comb(buf)) // flag wrong map data
 		return (false);
-	if (hex_flag == 0 && hex_char == 1)
+	if (hex_flag == 0 && hex_char == 1)// flag wrong map data
 		return (false);
 	return (true);
 }
@@ -99,14 +99,14 @@ static bool	test_map(char *map, t_map *map_strct)
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
 		return (perror("open fail \n"), false);
-	buffer = read_map(fd);
+	buffer = read_map(fd); // initial read and store of the buffer could have been done by reference instead of value
 	if (!buffer)
 		return (free(buffer), close(fd), false);
-	map_strct->map = ft_strdup(buffer);
+	map_strct->map = ft_strdup(buffer); // dup tested inside test_map
 	free(buffer);
-	if (!test_map_validity(map_strct->map))
+	if (!test_map_validity(map_strct->map)) // notably hex code check
 		return (close(fd), false);
-	if (!test_int(map_strct->map))
+	if (!test_int(map_strct->map)) // check for xyz parametes int value overflow
 		return (close(fd), false);
 	return (close(fd), true);
 }
@@ -120,10 +120,10 @@ bool	test_input(char *map, t_map *map_strct)
 	cursor = 0;
 	if (!map)
 		return (false);
-	cursor = ft_strrchr(map, '.');
+	cursor = ft_strrchr(map, '.'); // test filename has extension mark
 	if (!cursor)
 		return (false);
-	if (ft_strcmp(cursor, extension) != 0)
+	if (ft_strcmp(cursor, extension) != 0) // test extension validity
 		return (false);
 	if (!test_map(map, map_strct))
 		return (false);
